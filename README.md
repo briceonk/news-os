@@ -5,10 +5,10 @@ in English. Hopefully this will help preserve information about these
 workstations. This is very much a work-in-progress.
 
 ## Pages
-introduction.md - What is NEWS?
-nws5000x.md - Information about the NWS-5000x workstation
-news-os-42.md - Using NEWS-OS 4.2.x
-news-os-6.md - Using NEWS-OS 6.x
+- introduction.md: What is NEWS?
+- nws5000x.md: Information about the NWS-5000x workstation
+- news-os-42.md: Using NEWS-OS 4.2.x
+- news-os-6.md: Using NEWS-OS 6.x
 
 ## Sources and Further Reading (mainly in Japanese)
 - [ozuma's NEWS 5000x operations page](http://ozuma.o.oo7.jp/nws5000x.htm)
