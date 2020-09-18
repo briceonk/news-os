@@ -4,6 +4,11 @@ workstations. There is limited information about NEWS workstations, especially
 in English. Hopefully this will help preserve information about these
 workstations. This is very much a work-in-progress.
 
+The `src` folder contains source code and scripts for quick utilities I wrote
+to do various tasks when working with my NWS-5000X.
+- `xdmcp.py`: Automates launching XDMCP sessions from any machine with Xephyr installed
+- `rarp/`: Docker image which can respond to RARP requests from the NEWS ROM Monitor
+
 ## Pages
 - introduction.md: What is NEWS?
 - nws5000x.md: Information about the NWS-5000x workstation
