@@ -91,7 +91,7 @@ def nws_5000x(memory):
     os.mkdir(results_dir)
 
     # Monitor ROM
-    mrom_base_address, mrom_length = 0x9fc00000, 0x3FFF0  # 256kB ROM
+    mrom_base_address, mrom_length = 0x9fc00000, 0x3FFF0
     mrom_mirrors = [((mrom_base_address + (mrom_length + 16) * n),
                      (mrom_base_address + (mrom_length + 16) * (n + 1)))
                     for n in range(0, 4)]  # Mirrored 3 additional times
