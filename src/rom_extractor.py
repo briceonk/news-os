@@ -2,7 +2,9 @@
 import re
 import os
 import sys
+import logging
 import hashlib
+import argparse
 
 
 class ImageChecksumError(Exception):
@@ -11,38 +13,52 @@ class ImageChecksumError(Exception):
         self.chksums = chksums
 
 
-class RomValidator:
+class MemoryExtractor:
     """
-    Class with functions for validating memory backups
+    Class with functions for saving and validating mirrored memory dumps
 
-    This should probably be less... hacky?
+    There are smarter ways to do this, but it worked well enough for this purpose.
     """
 
     # Regular expression for parsing the output of the NEWS ROM Monitor's md command
     md_regexp = re.compile(r"([0-9a-fA-F]+): ([0-9a-fA-F]{8}) ([0-9a-fA-F]{8}) ([0-9a-fA-F]{8}) ([0-9a-fA-F]{8}) (.+)")
 
-    @classmethod
-    def convert_text(cls, raw_data: list) -> dict:
+    def __init__(self, verbose):
+        self.log = logging.getLogger()
+        self._configure_logging(self.log, verbose)
+
+    @staticmethod
+    def _configure_logging(log, verbose) -> None:
+        log.setLevel(logging.DEBUG)
+        stdout_handler = logging.StreamHandler(sys.stdout)
+        if verbose == 0:
+            stdout_handler.setLevel(logging.WARNING)
+        elif verbose == 1:
+            stdout_handler.setLevel(logging.INFO)
+        else:
+            stdout_handler.setLevel(logging.DEBUG)
+        log.addHandler(stdout_handler)
+
+    def extract_memory_contents(self, raw_data: list) -> dict:
         memory = {}  # This isn't the most space-efficient, but handles non-contiguous regions without much fuss
         for line in raw_data:
-            match = cls.md_regexp.match(line)
+            match = self.md_regexp.match(line)
             if match:  # Anything that doesn't match regex due to corruption will be caught in validate_rom_backup
                 addr = int(match.group(1), 16)
                 val = bytearray.fromhex("".join([match.group(x) for x in range(2, 6)]))
                 if len(val) != 16:
                     raise RuntimeError("Corrupt data at location {}! Data: {}".format(hex(addr), val))
                 elif addr in memory and val != memory[addr]:
+                    # This case handles validating redundant dumps
                     raise RuntimeError("Conflicting values found for data at location {}!".format(hex(addr)))
                 memory[addr] = val
 
         return memory
 
-    @staticmethod
-    def validate_rom_backup(memory: dict, ranges: list) -> tuple:
+    def validate_memory_backup(self, memory: dict, ranges: list) -> tuple:
         images = []
         for r in ranges:
             image = bytearray()
-            print("r[0] = {}, r[1] = {}, r[1] + 16 = {}".format(hex(r[0]), hex(r[1]), hex(r[1] + 16)))
             for lw_addr in range(r[0], r[1], 16):
                 try:
                     image.extend(memory[lw_addr])
@@ -53,25 +69,23 @@ class RomValidator:
             images.append((r, chksum.hexdigest(), image))
 
         if not all([images[0][2] == img_data[2] for img_data in images]):
-            print("Failed image verification!")
-            print("Range: MD5 Checksum")
+            self.log.error("Failed image verification!")
+            self.log.error("Range: MD5 Checksum")
             for img_data in images:
-                print("{}: {}".format(img_data[0], img_data[1]))
+                self.log.error("{}: {}".format(img_data[0], img_data[1]))
             raise ImageChecksumError("Failed image verification!", [imgdata[1] for imgdata in images])
 
         return images[0][1], images[0][2]
 
-    @classmethod
-    def dump_memory(cls, memory: dict):
+    def dump_memory(self, memory: dict):
         for key in sorted(memory.keys()):
-            print("{}: {}".format(hex(key), memory[key]))
+            self.log.debug("{}: {}".format(hex(key), memory[key]))
 
-    @staticmethod
-    def image_debug(memory, start_a, start_b, length):
+    def image_debug(self, memory, start_a, start_b, length):
         for i in range(0, length, 16):
             if memory[start_a + i] != memory[start_b + i]:
-                print("Offset {} mismatch! A = {} B = {}".format(hex(i), hex(memory[start_a + i]),
-                                                                 hex(memory[start_b + i])))
+                self.log.error("Offset {} mismatch! A = {} B = {}".format(hex(i), hex(memory[start_a + i]),
+                                                                          hex(memory[start_b + i])))
 
     @staticmethod
     def write_files_to_disk(results, directory):
@@ -81,26 +95,51 @@ class RomValidator:
                 rom_file.write(results[image][1])
 
             # Write ROM checksum to disk
-            with open(os.path.join(directory, image) + ".md5", "x") as rom_file:
-                rom_file.write(results[image][0])
+            with open(os.path.join(directory, image) + ".md5", "x") as chksum_file:
+                chksum_file.write(results[image][0] + "\n")
 
 
-def nws_5000x(memory):
-    results = {}
-    results_dir = "./nws-5000x"
-    os.mkdir(results_dir)
+class NWS5000:
+    """Class that uses MemoryExtractor to extract NWS-5000X read-only memory ranges"""
 
-    # Monitor ROM
-    mrom_base_address, mrom_length = 0x9fc00000, 0x3FFF0
-    mrom_mirrors = [((mrom_base_address + (mrom_length + 16) * n),
-                     (mrom_base_address + (mrom_length + 16) * (n + 1)))
-                    for n in range(0, 4)]  # Mirrored 3 additional times
-    results["monitor_rom"] = RomValidator.validate_rom_backup(memory, mrom_mirrors)
+    # (base_address, length, [mirror_ranges_for_validation])
+    nws5k_roms = {
+        # Monitor ROM - 256KiB, 0x9fc00000-0x9fc3ffff, mirrored 3 times beyond base
+        "monitor_rom": (0x9fc00000, 0x40000,
+                        [((0x9fc00000 + 0x40000 * n), (0x9fc00000 + 0x40000 * (n + 1))) for n in range(0, 4)])
+    }
 
-    RomValidator.write_files_to_disk(results, results_dir)
+    @classmethod
+    def _get_arguments(cls, arg_source=None):
+        parser = argparse.ArgumentParser()
+        parser.add_argument("-v", "--verbose", action="count", default=0,
+                            help="Control debug output level (more Vs = more output)")
+        parser.add_argument("-o", "--output", default="./nws-5000x", help="Output directory")
+        parser.add_argument("-r", "--roms", default="", help="Comma-delimited list of roms to dump")
+        parser.add_argument("serial_log", help="Path to serial log file with NEWS md output")
+        return parser.parse_args(arg_source)
+
+    @classmethod
+    def extract_mem(cls, extractor, memory, roms, results_dir):
+        # Create output directory
+        os.mkdir(results_dir)
+
+        # Extract selected ROMs
+        results = {}
+        rom_list = cls.nws5k_roms.keys() if roms == "" else filter(lambda x: x in roms.split(","),
+                                                                   cls.nws5k_roms.keys())
+        for rom in rom_list:
+            results[rom] = extractor.validate_memory_backup(memory, cls.nws5k_roms[rom][2])
+        extractor.write_files_to_disk(results, results_dir)
+
+    @classmethod
+    def main(cls):
+        args = cls._get_arguments()
+        extractor = MemoryExtractor(args.verbose)
+        with open(args.serial_log) as f:
+            data = extractor.extract_memory_contents(f.readlines())
+        cls.extract_mem(extractor, data, args.roms, args.output)
 
 
 if __name__ == '__main__':
-    with open(sys.argv[1]) as f:
-        data = RomValidator.convert_text(f.readlines())
-    nws_5000x(data)
+    NWS5000.main()
