@@ -12,7 +12,7 @@ miniroot filesystem from the CD-ROM to the swap space on disk and boot from it.
 Miniroot contains the installation script and programs. Once the miniroot image
 has booted, the installation program will start automatically.
 
-## X-Windows setup
+# X-Windows setup
 When installing NEWS-OS 4.2.1aR, unless you have a fully working monitor, mouse,
 and keyboard setup, I recommend installing the desired X11 packages but not
 selecting the option to start X-Windows automatically at startup. This way, the
@@ -28,4 +28,39 @@ login application. `xdm` uses `twm` for the window manager, and has an `xterm`
 session as the login application.
 
 ![](img/sxdm_login_screen.png)
+
 *sxdm login prompt*
+
+![](img/sxsession.png)
+
+*Sony SXsession launcher*
+
+### Enabling Japanese text rendering
+NEWS-OS has its own Japanese fonts. Modern installs of X11 don't include them.
+To fix this, copy the contents of `/usr/lib/X11/fonts/sony` to a path on your
+modern machine included on the X11 font path, like `~/.local/share/fonts`. You
+can check what paths X11 has configured by running `xset q`.
+
+Note that NEWS-OS will only work with Japanese text if the terminal is set to
+use Japanese, which can be checked by using `set` to get the value of the `term`
+variable. For example, `xterm` will only support ASCII, but `xterm-sjis` will
+be able to display Shift-JIS encoded Japanese text. The `jterm` command will
+launch `xterm` with `xterm-sjis` set.
+
+### Japanese input
+NEWS-OS has a few components that work together to enable Japanese input.
+Additionally, terminal input is handled differently from X11. The components
+have man pages in English and Japanese available, but in brief:
+- `sj3serv`: Service that provides Kana to Kanji conversions
+- `sj3`: Terminal that supports Japanese and English text input, and can
+   communicate with `sj3serv` to provide Kana to Kanji capabilities as well.
+   This includes file names. `sj3` will only work in a terminal that uses a
+   Japanese encoding.
+
+![](img/sj3.png)
+
+*ASCII vs SJIS terminal*
+
+There are additional components (`sjx` for X11, `sj3dic` for managing custom
+conversion dictionaries) as well as older utilities (`sj2`, `sj2dic`) that may
+be available depending on what settings were selected during installation.
