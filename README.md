@@ -6,6 +6,7 @@ workstations. This is very much a work-in-progress.
 
 The `src` folder contains source code and scripts for quick utilities I wrote
 to do various tasks when working with my NWS-5000X.
+- `newsos_cd_extractor.py`: Extracts archives from the NEWS-OS 4.2.1aR CD
 - `xdmcp.py`: Automates launching XDMCP sessions from any machine with Xephyr installed
 - `rarp/`: Docker image which can respond to RARP requests from the NEWS ROM Monitor
 
