@@ -16,7 +16,7 @@ has booted, the installation program will start automatically.
 When installing NEWS-OS 4.2.1aR, unless you have a fully working monitor, mouse,
 and keyboard setup, I recommend installing the desired X11 packages but not
 selecting the option to start X-Windows automatically at startup. This way, the
-serial console will remain available in /etc/ttys. Then, `sxdm` or `xdm` can be
+serial console will remain enabled in /etc/ttys. Then, `sxdm` or `xdm` can be
 selected in `/etc/rc.custom` after the system install and will be started
 automatically on subsequent boots.
 
@@ -24,7 +24,7 @@ automatically on subsequent boots.
 Sony included two X11 display managers with NEWS-OS 4.2.1, the standard `xdm` as
 well as the Sony `sxdm` manager. The `sxdm` manager has a NEWS-specific login
 screen, uses `mwm` as the default window manager, and has `sxsession` as the
-login application. `xdm` uses `twm` for the window manager, and has an `xterm`
+login application. `xdm` uses `twm` as the default window manager, and has an `xterm`
 session as the login application.
 
 ![](img/sxdm_login_screen.png)
@@ -43,9 +43,9 @@ can check what paths X11 has configured by running `xset q`.
 
 Note that NEWS-OS will only work with Japanese text if the terminal is set to
 use Japanese, which can be checked by using `set` to get the value of the `term`
-variable. For example, `xterm` will only support ASCII, but `xterm-sjis` will
+variable. For example, `xterm` will only support ASCII, but `xterm-sjis` or `jterm` will
 be able to display Shift-JIS encoded Japanese text. The `jterm` command will
-launch `xterm` with `xterm-sjis` set.
+launch `xterm` with `term` set to `jterm`.
 
 ### Japanese input
 NEWS-OS has a few components that work together to enable Japanese input.
