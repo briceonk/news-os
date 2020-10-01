@@ -12,17 +12,28 @@ miniroot filesystem from the CD-ROM to the swap space on disk and boot from it.
 Miniroot contains the installation script and programs. Once the miniroot image
 has booted, the installation program will start automatically.
 
+# Enabling fastboot
+By default, NEWS-OS 4.2 will run disk checks at every boot. While this is typically
+a good idea, it can result in long boot times, especially if using a SCSI2SD or newer
+hard drive formatted with more space than was realistic for the time. The `fastboot`
+program bypasses the disk check for one boot by creating `/fastboot`, but `/etc/rc`
+clears this by default, meaning that it doesn't persist, just does one reboot without
+running disk checks. If you don't want to edit `/etc/rc` to bypass the check, you can
+do it by creating `/fastboot` and making `/etc/rc.safs` with just an `exit 0` call.
+This will cause `/etc/rc` to skip the removal of `/fastboot`, thus making every boot
+skip the filesystem checks. If you do this, make sure you manually run fsck from time
+to time, or after emergency power loss situations. This is a hack, so use with care :)
+
 # X-Windows setup
 When installing NEWS-OS 4.2.1aR, unless you have a fully working monitor, mouse,
 and keyboard setup, I recommend installing the desired X11 packages but not
 selecting the option to start X-Windows automatically at startup. This way, the
-serial console will remain enabled in /etc/ttys. Then, `sxdm` or `xdm` can be
-selected in `/etc/rc.custom` after the system install and will be started
-automatically on subsequent boots.
+serial console will remain enabled in /etc/ttys. The `dmset` command can be used
+to enable it later (see below).
 
 ### Selecting an X11 display manager
 Sony included two X11 display managers with NEWS-OS 4.2.1, the standard `xdm` as
-well as the Sony `sxdm` manager. The `sxdm` manager has a NEWS-specific login
+well as the Sony NEWS Desk `sxdm` manager. The `sxdm` manager has a NEWS-specific login
 screen, uses `mwm` as the default window manager, and has `sxsession` as the
 login application. `xdm` uses `twm` as the default window manager, and has an `xterm`
 session as the login application.
@@ -34,6 +45,10 @@ session as the login application.
 ![](img/sxsession.png)
 
 *Sony SXsession launcher*
+
+To launch a display manager automatically at system boot time, run the `dmset` command.
+`dmset` alone will set the default to `sxdm`, `dmset -x` will set it to `xdm`, and `dmset -n`
+will disable X11 display manager auto-launch.
 
 ### Enabling Japanese text rendering
 NEWS-OS has its own Japanese fonts. Modern installs of X11 don't include them.
