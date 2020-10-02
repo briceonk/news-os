@@ -1,0 +1,1185 @@
+Real memory size 0x04000000 (65536KB)
+Free memory size 0x03ff2378 (65480KB)
+
+slot 0: base=0xb4800000, size=0x00400000, Sony/DSC-39
+
+Testing main memory from 0x00000000 through 0x03efffff:     63 62 61 60 59 58 57 56 55 54 53 52 51 50 49 48 47 46 45 44 43 42 41 40 39 38 37 36 35 34 33 32 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1done
+
+SONY NET WORK STATION, Model NWS-5000, Machine ID #14167
+APbus System Monitor Release 3.201
+Copyright (c) 1992, 1993, 1994 Sony Corporation, All Rights Reserved
+
+sonic0: hardware address 08:00:46:00:fe:e6
+spifi0: initiator id 7
+spifi1: initiator id 7
+xb0: VRAM version - no cable attached
+
+Fri Sep 25 22:00:52 GMT 1998
+
+> he
+= <formula>                                       : evaluate numeric expression
+bo [ -abdfrnsux ] [ -o <switch> ] [ <devspec> [ <file> [ <args> ... ]]]
+                                                  : boot operating system
+cls                                               : clear screen
+date [ <yymmddhhmm>[.<ss>] ]                      : set or show date and time
+dd [ if=<in> ] [ of=<out> ] [ <options> ]         : copy device
+diag <devspec> [ <level> ]                        : diagnostic test
+dis [ <begin> [ <end> ]]                          : disassemble memory
+dl [ <devspec> ]                                  : show disklabel
+ej [ <devspec> ]                                  : eject medium
+format <devspec>                                  : format medium
+he [ <command> ]                                  : display help message
+hi                                                : history list
+md [ -{b|h|w} ] [ <begin> [ <end> ]]              : display memory
+me [ <addr> ]                                     : edit memory
+mf [ -{b|h|w} ] <begin> <end> [ <data> ]          : fill memory
+mm <begin> <end> <dest>                           : move memory
+ms [ -{b|h|w} ] [ <addr> [ <data> ]]              : substitute memory
+mx [ -m <mask> ] <begin> <end> <pattern>          : scan memory
+off                                               : turn power off
+ra                                                : reverse arp
+rc                                                : reconfig device
+rx [ {10|16} ]                                    : change radix
+[7m MORE [m
+      
+set [ <var>[=[<val>]] ]                           : set variable
+ss [ -adflmnprsvx ]                               : show system status
+term [ <baud> ]                                   : terminal emulator
+unset <var>                                       : unset variable
+vers [ -s ]                                       : show system version
+> bo scsi(,0 40)
+APbus CD-ROM Primary Boot Program
+
+NEWS-OS Install Program Release 4.3000
+Copyright (c) 1991, 1992, 1993 Sony Corporation
+All Rights Reserved
+
+Install from CD-ROM at bus 0, channel 4.
+Destination is hard disk at bus 0, channel 0.
+
+(1) Write disklabel to scsi(0,0,0).
+    Tahoe disklabel is available, use this (y/n)? y n
+    Size of root (/) partition (s=7M, m=15M, l=23M or bsize): m l
+    Set "root_swap_l" type disklabel into first sector.
+(2) Copy mini root from scsi(0,40,0) to scsi(0,0,1), 16384 sectors.
+    Seek to sector #120.
+    Read    128 sectors, 16256 sector(s) left(s).
+    Write   128 sectors, 16256 sector(s) left(s).
+    Verify  128 sectors, 16256 sector(s) left(s).
+    Read    128 sectors, 16128 sector(s) left(s).
+    Write   128 sectors, 16128 sector(s) left(s).
+    Verify  128 sectors, 16128 sector(s) left(s).
+    Read    128 sectors, 16000 sector(s) left(s).
+    Write   128 sectors, 16000 sector(s) left(s).
+    Verify  128 sectors, 16000 sector(s) left(s).
+    Read    128 sectors, 15872 sector(s) left(s).
+    Write   128 sectors, 15872 sector(s) left(s).
+    Verify  128 sectors, 15872 sector(s) left(s).
+    Read    128 sectors, 15744 sector(s) left(s).
+    Write   128 sectors, 15744 sector(s) left(s).
+    Verify  128 sectors, 15744 sector(s) left(s).
+    Read    128 sectors, 15616 sector(s) left(s).
+    Write   128 sectors, 15616 sector(s) left(s).
+    Verify  128 sectors, 15616 sector(s) left(s).
+    Read    128 sectors, 15488 sector(s) left(s).
+    Write   128 sectors, 15488 sector(s) left(s).
+    Verify  128 sectors, 15488 sector(s) left(s).
+    Read    128 sectors, 15360 sector(s) left(s).
+    Write   128 sectors, 15360 sector(s) left(s).
+    Verify  128 sectors, 15360 sector(s) left(s).
+    Read    128 sectors, 15232 sector(s) left(s).
+    Write   128 sectors, 15232 sector(s) left(s).
+    Verify  128 sectors, 15232 sector(s) left(s).
+    Read    128 sectors, 15104 sector(s) left(s).
+    Write   128 sectors, 15104 sector(s) left(s).
+    Verify  128 sectors, 15104 sector(s) left(s).
+    Read    128 sectors, 14976 sector(s) left(s).
+    Write   128 sectors, 14976 sector(s) left(s).
+    Verify  128 sectors, 14976 sector(s) left(s).
+    Read    128 sectors, 14848 sector(s) left(s).
+    Write   128 sectors, 14848 sector(s) left(s).
+    Verify  128 sectors, 14848 sector(s) left(s).
+    Read    128 sectors, 14720 sector(s) left(s).
+    Write   128 sectors, 14720 sector(s) left(s).
+    Verify  128 sectors, 14720 sector(s) left(s).
+    Read    128 sectors, 14592 sector(s) left(s).
+    Write   128 sectors, 14592 sector(s) left(s).
+    Verify  128 sectors, 14592 sector(s) left(s).
+    Read    128 sectors, 14464 sector(s) left(s).
+    Write   128 sectors, 14464 sector(s) left(s).
+    Verify  128 sectors, 14464 sector(s) left(s).
+    Read    128 sectors, 14336 sector(s) left(s).
+    Write   128 sectors, 14336 sector(s) left(s).
+    Verify  128 sectors, 14336 sector(s) left(s).
+    Read    128 sectors, 14208 sector(s) left(s).
+    Write   128 sectors, 14208 sector(s) left(s).
+    Verify  128 sectors, 14208 sector(s) left(s).
+    Read    128 sectors, 14080 sector(s) left(s).
+    Write   128 sectors, 14080 sector(s) left(s).
+    Verify  128 sectors, 14080 sector(s) left(s).
+    Read    128 sectors, 13952 sector(s) left(s).
+    Write   128 sectors, 13952 sector(s) left(s).
+    Verify  128 sectors, 13952 sector(s) left(s).
+    Read    128 sectors, 13824 sector(s) left(s).
+    Write   128 sectors, 13824 sector(s) left(s).
+    Verify  128 sectors, 13824 sector(s) left(s).
+    Read    128 sectors, 13696 sector(s) left(s).
+    Write   128 sectors, 13696 sector(s) left(s).
+    Verify  128 sectors, 13696 sector(s) left(s).
+    Read    128 sectors, 13568 sector(s) left(s).
+    Write   128 sectors, 13568 sector(s) left(s).
+    Verify  128 sectors, 13568 sector(s) left(s).
+    Read    128 sectors, 13440 sector(s) left(s).
+    Write   128 sectors, 13440 sector(s) left(s).
+    Verify  128 sectors, 13440 sector(s) left(s).
+    Read    128 sectors, 13312 sector(s) left(s).
+    Write   128 sectors, 13312 sector(s) left(s).
+    Verify  128 sectors, 13312 sector(s) left(s).
+    Read    128 sectors, 13184 sector(s) left(s).
+    Write   128 sectors, 13184 sector(s) left(s).
+    Verify  128 sectors, 13184 sector(s) left(s).
+    Read    128 sectors, 13056 sector(s) left(s).
+    Write   128 sectors, 13056 sector(s) left(s).
+    Verify  128 sectors, 13056 sector(s) left(s).
+    Read    128 sectors, 12928 sector(s) left(s).
+    Write   128 sectors, 12928 sector(s) left(s).
+    Verify  128 sectors, 12928 sector(s) left(s).
+    Read    128 sectors, 12800 sector(s) left(s).
+    Write   128 sectors, 12800 sector(s) left(s).
+    Verify  128 sectors, 12800 sector(s) left(s).
+    Read    128 sectors, 12672 sector(s) left(s).
+    Write   128 sectors, 12672 sector(s) left(s).
+    Verify  128 sectors, 12672 sector(s) left(s).
+    Read    128 sectors, 12544 sector(s) left(s).
+    Write   128 sectors, 12544 sector(s) left(s).
+    Verify  128 sectors, 12544 sector(s) left(s).
+    Read    128 sectors, 12416 sector(s) left(s).
+    Write   128 sectors, 12416 sector(s) left(s).
+    Verify  128 sectors, 12416 sector(s) left(s).
+    Read    128 sectors, 12288 sector(s) left(s).
+    Write   128 sectors, 12288 sector(s) left(s).
+    Verify  128 sectors, 12288 sector(s) left(s).
+    Read    128 sectors, 12160 sector(s) left(s).
+    Write   128 sectors, 12160 sector(s) left(s).
+    Verify  128 sectors, 12160 sector(s) left(s).
+    Read    128 sectors, 12032 sector(s) left(s).
+    Write   128 sectors, 12032 sector(s) left(s).
+    Verify  128 sectors, 12032 sector(s) left(s).
+    Read    128 sectors, 11904 sector(s) left(s).
+    Write   128 sectors, 11904 sector(s) left(s).
+    Verify  128 sectors, 11904 sector(s) left(s).
+    Read    128 sectors, 11776 sector(s) left(s).
+    Write   128 sectors, 11776 sector(s) left(s).
+    Verify  128 sectors, 11776 sector(s) left(s).
+    Read    128 sectors, 11648 sector(s) left(s).
+    Write   128 sectors, 11648 sector(s) left(s).
+    Verify  128 sectors, 11648 sector(s) left(s).
+    Read    128 sectors, 11520 sector(s) left(s).
+    Write   128 sectors, 11520 sector(s) left(s).
+    Verify  128 sectors, 11520 sector(s) left(s).
+    Read    128 sectors, 11392 sector(s) left(s).
+    Write   128 sectors, 11392 sector(s) left(s).
+    Verify  128 sectors, 11392 sector(s) left(s).
+    Read    128 sectors, 11264 sector(s) left(s).
+    Write   128 sectors, 11264 sector(s) left(s).
+    Verify  128 sectors, 11264 sector(s) left(s).
+    Read    128 sectors, 11136 sector(s) left(s).
+    Write   128 sectors, 11136 sector(s) left(s).
+    Verify  128 sectors, 11136 sector(s) left(s).
+    Read    128 sectors, 11008 sector(s) left(s).
+    Write   128 sectors, 11008 sector(s) left(s).
+    Verify  128 sectors, 11008 sector(s) left(s).
+    Read    128 sectors, 10880 sector(s) left(s).
+    Write   128 sectors, 10880 sector(s) left(s).
+    Verify  128 sectors, 10880 sector(s) left(s).
+    Read    128 sectors, 10752 sector(s) left(s).
+    Write   128 sectors, 10752 sector(s) left(s).
+    Verify  128 sectors, 10752 sector(s) left(s).
+    Read    128 sectors, 10624 sector(s) left(s).
+    Write   128 sectors, 10624 sector(s) left(s).
+    Verify  128 sectors, 10624 sector(s) left(s).
+    Read    128 sectors, 10496 sector(s) left(s).
+    Write   128 sectors, 10496 sector(s) left(s).
+    Verify  128 sectors, 10496 sector(s) left(s).
+    Read    128 sectors, 10368 sector(s) left(s).
+    Write   128 sectors, 10368 sector(s) left(s).
+    Verify  128 sectors, 10368 sector(s) left(s).
+    Read    128 sectors, 10240 sector(s) left(s).
+    Write   128 sectors, 10240 sector(s) left(s).
+    Verify  128 sectors, 10240 sector(s) left(s).
+    Read    128 sectors, 10112 sector(s) left(s).
+    Write   128 sectors, 10112 sector(s) left(s).
+    Verify  128 sectors, 10112 sector(s) left(s).
+    Read    128 sectors,  9984 sector(s) left(s).
+    Write   128 sectors,  9984 sector(s) left(s).
+    Verify  128 sectors,  9984 sector(s) left(s).
+    Read    128 sectors,  9856 sector(s) left(s).
+    Write   128 sectors,  9856 sector(s) left(s).
+    Verify  128 sectors,  9856 sector(s) left(s).
+    Read    128 sectors,  9728 sector(s) left(s).
+    Write   128 sectors,  9728 sector(s) left(s).
+    Verify  128 sectors,  9728 sector(s) left(s).
+    Read    128 sectors,  9600 sector(s) left(s).
+    Write   128 sectors,  9600 sector(s) left(s).
+    Verify  128 sectors,  9600 sector(s) left(s).
+    Read    128 sectors,  9472 sector(s) left(s).
+    Write   128 sectors,  9472 sector(s) left(s).
+    Verify  128 sectors,  9472 sector(s) left(s).
+    Read    128 sectors,  9344 sector(s) left(s).
+    Write   128 sectors,  9344 sector(s) left(s).
+    Verify  128 sectors,  9344 sector(s) left(s).
+    Read    128 sectors,  9216 sector(s) left(s).
+    Write   128 sectors,  9216 sector(s) left(s).
+    Verify  128 sectors,  9216 sector(s) left(s).
+    Read    128 sectors,  9088 sector(s) left(s).
+    Write   128 sectors,  9088 sector(s) left(s).
+    Verify  128 sectors,  9088 sector(s) left(s).
+    Read    128 sectors,  8960 sector(s) left(s).
+    Write   128 sectors,  8960 sector(s) left(s).
+    Verify  128 sectors,  8960 sector(s) left(s).
+    Read    128 sectors,  8832 sector(s) left(s).
+    Write   128 sectors,  8832 sector(s) left(s).
+    Verify  128 sectors,  8832 sector(s) left(s).
+    Read    128 sectors,  8704 sector(s) left(s).
+    Write   128 sectors,  8704 sector(s) left(s).
+    Verify  128 sectors,  8704 sector(s) left(s).
+    Read    128 sectors,  8576 sector(s) left(s).
+    Write   128 sectors,  8576 sector(s) left(s).
+    Verify  128 sectors,  8576 sector(s) left(s).
+    Read    128 sectors,  8448 sector(s) left(s).
+    Write   128 sectors,  8448 sector(s) left(s).
+    Verify  128 sectors,  8448 sector(s) left(s).
+    Read    128 sectors,  8320 sector(s) left(s).
+    Write   128 sectors,  8320 sector(s) left(s).
+    Verify  128 sectors,  8320 sector(s) left(s).
+    Read    128 sectors,  8192 sector(s) left(s).
+    Write   128 sectors,  8192 sector(s) left(s).
+    Verify  128 sectors,  8192 sector(s) left(s).
+    Read    128 sectors,  8064 sector(s) left(s).
+    Write   128 sectors,  8064 sector(s) left(s).
+    Verify  128 sectors,  8064 sector(s) left(s).
+    Read    128 sectors,  7936 sector(s) left(s).
+    Write   128 sectors,  7936 sector(s) left(s).
+    Verify  128 sectors,  7936 sector(s) left(s).
+    Read    128 sectors,  7808 sector(s) left(s).
+    Write   128 sectors,  7808 sector(s) left(s).
+    Verify  128 sectors,  7808 sector(s) left(s).
+    Read    128 sectors,  7680 sector(s) left(s).
+    Write   128 sectors,  7680 sector(s) left(s).
+    Verify  128 sectors,  7680 sector(s) left(s).
+    Read    128 sectors,  7552 sector(s) left(s).
+    Write   128 sectors,  7552 sector(s) left(s).
+    Verify  128 sectors,  7552 sector(s) left(s).
+    Read    128 sectors,  7424 sector(s) left(s).
+    Write   128 sectors,  7424 sector(s) left(s).
+    Verify  128 sectors,  7424 sector(s) left(s).
+    Read    128 sectors,  7296 sector(s) left(s).
+    Write   128 sectors,  7296 sector(s) left(s).
+    Verify  128 sectors,  7296 sector(s) left(s).
+    Read    128 sectors,  7168 sector(s) left(s).
+    Write   128 sectors,  7168 sector(s) left(s).
+    Verify  128 sectors,  7168 sector(s) left(s).
+    Read    128 sectors,  7040 sector(s) left(s).
+    Write   128 sectors,  7040 sector(s) left(s).
+    Verify  128 sectors,  7040 sector(s) left(s).
+    Read    128 sectors,  6912 sector(s) left(s).
+    Write   128 sectors,  6912 sector(s) left(s).
+    Verify  128 sectors,  6912 sector(s) left(s).
+    Read    128 sectors,  6784 sector(s) left(s).
+    Write   128 sectors,  6784 sector(s) left(s).
+    Verify  128 sectors,  6784 sector(s) left(s).
+    Read    128 sectors,  6656 sector(s) left(s).
+    Write   128 sectors,  6656 sector(s) left(s).
+    Verify  128 sectors,  6656 sector(s) left(s).
+    Read    128 sectors,  6528 sector(s) left(s).
+    Write   128 sectors,  6528 sector(s) left(s).
+    Verify  128 sectors,  6528 sector(s) left(s).
+    Read    128 sectors,  6400 sector(s) left(s).
+    Write   128 sectors,  6400 sector(s) left(s).
+    Verify  128 sectors,  6400 sector(s) left(s).
+    Read    128 sectors,  6272 sector(s) left(s).
+    Write   128 sectors,  6272 sector(s) left(s).
+    Verify  128 sectors,  6272 sector(s) left(s).
+    Read    128 sectors,  6144 sector(s) left(s).
+    Write   128 sectors,  6144 sector(s) left(s).
+    Verify  128 sectors,  6144 sector(s) left(s).
+    Read    128 sectors,  6016 sector(s) left(s).
+    Write   128 sectors,  6016 sector(s) left(s).
+    Verify  128 sectors,  6016 sector(s) left(s).
+    Read    128 sectors,  5888 sector(s) left(s).
+    Write   128 sectors,  5888 sector(s) left(s).
+    Verify  128 sectors,  5888 sector(s) left(s).
+    Read    128 sectors,  5760 sector(s) left(s).
+    Write   128 sectors,  5760 sector(s) left(s).
+    Verify  128 sectors,  5760 sector(s) left(s).
+    Read    128 sectors,  5632 sector(s) left(s).
+    Write   128 sectors,  5632 sector(s) left(s).
+    Verify  128 sectors,  5632 sector(s) left(s).
+    Read    128 sectors,  5504 sector(s) left(s).
+    Write   128 sectors,  5504 sector(s) left(s).
+    Verify  128 sectors,  5504 sector(s) left(s).
+    Read    128 sectors,  5376 sector(s) left(s).
+    Write   128 sectors,  5376 sector(s) left(s).
+    Verify  128 sectors,  5376 sector(s) left(s).
+    Read    128 sectors,  5248 sector(s) left(s).
+    Write   128 sectors,  5248 sector(s) left(s).
+    Verify  128 sectors,  5248 sector(s) left(s).
+    Read    128 sectors,  5120 sector(s) left(s).
+    Write   128 sectors,  5120 sector(s) left(s).
+    Verify  128 sectors,  5120 sector(s) left(s).
+    Read    128 sectors,  4992 sector(s) left(s).
+    Write   128 sectors,  4992 sector(s) left(s).
+    Verify  128 sectors,  4992 sector(s) left(s).
+    Read    128 sectors,  4864 sector(s) left(s).
+    Write   128 sectors,  4864 sector(s) left(s).
+    Verify  128 sectors,  4864 sector(s) left(s).
+    Read    128 sectors,  4736 sector(s) left(s).
+    Write   128 sectors,  4736 sector(s) left(s).
+    Verify  128 sectors,  4736 sector(s) left(s).
+    Read    128 sectors,  4608 sector(s) left(s).
+    Write   128 sectors,  4608 sector(s) left(s).
+    Verify  128 sectors,  4608 sector(s) left(s).
+    Read    128 sectors,  4480 sector(s) left(s).
+    Write   128 sectors,  4480 sector(s) left(s).
+    Verify  128 sectors,  4480 sector(s) left(s).
+    Read    128 sectors,  4352 sector(s) left(s).
+    Write   128 sectors,  4352 sector(s) left(s).
+    Verify  128 sectors,  4352 sector(s) left(s).
+    Read    128 sectors,  4224 sector(s) left(s).
+    Write   128 sectors,  4224 sector(s) left(s).
+    Verify  128 sectors,  4224 sector(s) left(s).
+    Read    128 sectors,  4096 sector(s) left(s).
+    Write   128 sectors,  4096 sector(s) left(s).
+    Verify  128 sectors,  4096 sector(s) left(s).
+    Read    128 sectors,  3968 sector(s) left(s).
+    Write   128 sectors,  3968 sector(s) left(s).
+    Verify  128 sectors,  3968 sector(s) left(s).
+    Read    128 sectors,  3840 sector(s) left(s).
+    Write   128 sectors,  3840 sector(s) left(s).
+    Verify  128 sectors,  3840 sector(s) left(s).
+    Read    128 sectors,  3712 sector(s) left(s).
+    Write   128 sectors,  3712 sector(s) left(s).
+    Verify  128 sectors,  3712 sector(s) left(s).
+    Read    128 sectors,  3584 sector(s) left(s).
+    Write   128 sectors,  3584 sector(s) left(s).
+    Verify  128 sectors,  3584 sector(s) left(s).
+    Read    128 sectors,  3456 sector(s) left(s).
+    Write   128 sectors,  3456 sector(s) left(s).
+    Verify  128 sectors,  3456 sector(s) left(s).
+    Read    128 sectors,  3328 sector(s) left(s).
+    Write   128 sectors,  3328 sector(s) left(s).
+    Verify  128 sectors,  3328 sector(s) left(s).
+    Read    128 sectors,  3200 sector(s) left(s).
+    Write   128 sectors,  3200 sector(s) left(s).
+    Verify  128 sectors,  3200 sector(s) left(s).
+    Read    128 sectors,  3072 sector(s) left(s).
+    Write   128 sectors,  3072 sector(s) left(s).
+    Verify  128 sectors,  3072 sector(s) left(s).
+    Read    128 sectors,  2944 sector(s) left(s).
+    Write   128 sectors,  2944 sector(s) left(s).
+    Verify  128 sectors,  2944 sector(s) left(s).
+    Read    128 sectors,  2816 sector(s) left(s).
+    Write   128 sectors,  2816 sector(s) left(s).
+    Verify  128 sectors,  2816 sector(s) left(s).
+    Read    128 sectors,  2688 sector(s) left(s).
+    Write   128 sectors,  2688 sector(s) left(s).
+    Verify  128 sectors,  2688 sector(s) left(s).
+    Read    128 sectors,  2560 sector(s) left(s).
+    Write   128 sectors,  2560 sector(s) left(s).
+    Verify  128 sectors,  2560 sector(s) left(s).
+    Read    128 sectors,  2432 sector(s) left(s).
+    Write   128 sectors,  2432 sector(s) left(s).
+    Verify  128 sectors,  2432 sector(s) left(s).
+    Read    128 sectors,  2304 sector(s) left(s).
+    Write   128 sectors,  2304 sector(s) left(s).
+    Verify  128 sectors,  2304 sector(s) left(s).
+    Read    128 sectors,  2176 sector(s) left(s).
+    Write   128 sectors,  2176 sector(s) left(s).
+    Verify  128 sectors,  2176 sector(s) left(s).
+    Read    128 sectors,  2048 sector(s) left(s).
+    Write   128 sectors,  2048 sector(s) left(s).
+    Verify  128 sectors,  2048 sector(s) left(s).
+    Read    128 sectors,  1920 sector(s) left(s).
+    Write   128 sectors,  1920 sector(s) left(s).
+    Verify  128 sectors,  1920 sector(s) left(s).
+    Read    128 sectors,  1792 sector(s) left(s).
+    Write   128 sectors,  1792 sector(s) left(s).
+    Verify  128 sectors,  1792 sector(s) left(s).
+    Read    128 sectors,  1664 sector(s) left(s).
+    Write   128 sectors,  1664 sector(s) left(s).
+    Verify  128 sectors,  1664 sector(s) left(s).
+    Read    128 sectors,  1536 sector(s) left(s).
+    Write   128 sectors,  1536 sector(s) left(s).
+    Verify  128 sectors,  1536 sector(s) left(s).
+    Read    128 sectors,  1408 sector(s) left(s).
+    Write   128 sectors,  1408 sector(s) left(s).
+    Verify  128 sectors,  1408 sector(s) left(s).
+    Read    128 sectors,  1280 sector(s) left(s).
+    Write   128 sectors,  1280 sector(s) left(s).
+    Verify  128 sectors,  1280 sector(s) left(s).
+    Read    128 sectors,  1152 sector(s) left(s).
+    Write   128 sectors,  1152 sector(s) left(s).
+    Verify  128 sectors,  1152 sector(s) left(s).
+    Read    128 sectors,  1024 sector(s) left(s).
+    Write   128 sectors,  1024 sector(s) left(s).
+    Verify  128 sectors,  1024 sector(s) left(s).
+    Read    128 sectors,   896 sector(s) left(s).
+    Write   128 sectors,   896 sector(s) left(s).
+    Verify  128 sectors,   896 sector(s) left(s).
+    Read    128 sectors,   768 sector(s) left(s).
+    Write   128 sectors,   768 sector(s) left(s).
+    Verify  128 sectors,   768 sector(s) left(s).
+    Read    128 sectors,   640 sector(s) left(s).
+    Write   128 sectors,   640 sector(s) left(s).
+    Verify  128 sectors,   640 sector(s) left(s).
+    Read    128 sectors,   512 sector(s) left(s).
+    Write   128 sectors,   512 sector(s) left(s).
+    Verify  128 sectors,   512 sector(s) left(s).
+    Read    128 sectors,   384 sector(s) left(s).
+    Write   128 sectors,   384 sector(s) left(s).
+    Verify  128 sectors,   384 sector(s) left(s).
+    Read    128 sectors,   256 sector(s) left(s).
+    Write   128 sectors,   256 sector(s) left(s).
+    Verify  128 sectors,   256 sector(s) left(s).
+    Read    128 sectors,   128 sector(s) left(s).
+    Write   128 sectors,   128 sector(s) left(s).
+    Verify  128 sectors,   128 sector(s) left(s).
+    Read    128 sectors,     0 sector(s) left(s).
+    Write   128 sectors,     0 sector(s) left(s).
+    Verify  128 sectors,     0 sector(s) left(s).
+
+    Done.
+(3) Boot mini root from scsi(0,0,1).
+APbus Primary Boot Program
+APbus Full Boot Program (0x83e00000-0x83e153df)
+: scsi(0,0,1)/vmunix
+text_start=0x80001000, data_start=0x8009db20, entry=0x80001a08
+.text:	address=0x80001000-0x8009db1f, size=641824  .oO.oO.oO. 
+.rdata:	address=0x8009db20-0x8009ed6f, size=4688  . 
+.data:	address=0x8009ed70-0x800b157f, size=75792  .o 
+.sdata:	address=0x800b1580-0x800b74ff, size=24448  . 
+.sbss:	address=0x800b7500-0x800b802f, size=2864   
+.bss:	address=0x800b8030-0x8025124f, size=1675808   
+SONY NET WORK STATION, Model NWS-5000, Machine ID #14167
+
+NEWS-OS Release 4.2.1R FCS#2 #0: Mon Jun 28 19:51:37 JST 1993
+
+    root@wsrel11:/MAKE4.XR/src/sys/INS5000
+
+Copyright (c) 1990, 1991, 1992, 1993 Sony Corporation
+
+All Rights Reserved
+
+real mem  = 67108864
+
+          = 64 MB
+
+primary data cache        : 16 KB
+
+primary instruction cache : 16 KB
+
+secondary cache (unified) : 1024 KB
+
+avail mem = 62500864
+
+using max. 11843 buffers, 48508928 bytes [dynamic allocate buffer]
+
+spifi0 at ap0 slot0 addr be280000 priority 0
+
+SCSI0 Initialization...   10 9 8 7 6 5 4 3 2 1done
+
+sd0 at spifi0 slave 0	(bus=0, chan=0, lun=0)
+
+sd0: UNKNOWN
+
+sd1 at spifi0 slave 1	(bus=0, chan=1, lun=0)
+
+sd1: UNKNOWN
+
+sd3 at spifi0 slave 3	(bus=0, chan=3, lun=0)
+
+sd3: CD-ROM (type B)
+
+sd4 at spifi0 slave 4	(bus=0, chan=4, lun=0)
+
+sd4: CD-ROM (type B)
+
+spifi1 at ap0 slot0 addr be380000 priority 0
+
+SCSI1 Initialization...   10 9 8 7 6 5 4 3 2 1done
+
+spifi0 at ap0 slot0 addr be280000 priority 0
+
+spifi1 at ap0 slot0 addr be380000 priority 0
+
+fd0 at ap0 slot0 addr bed20000 priority 34
+
+fdd0 at fd0 slave 0
+
+sonic0 at ap0 slot0 addr be600000 priority 16
+
+en0: hardware address 08:00:46:00:fe:e6
+
+esccf0 at ap0 slot0 addr be900000 priority 22
+
+kb0 at ap0 slot0 addr bf900000 priority 36
+
+kb0: NWP-410/411
+
+ms0 at ap0 slot0 addr bf900014 priority 40
+
+Changing root device to sd0b
+
+swap on rootdev
+
+WARNING: clock gained 1914 days -- CHECK AND RESET THE DATE!
+
+root fstype 4.3 (sd0b)
+
+swap fstype spec (sd0b, 16720KB)
+
+swap fstype spec (sd1b, 131072KB)
+
+erase ^?, kill ^U, intr ^C
+
+
+Please wait till the Installation Program starts ...[;H[2J\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00
+	  @@@@	NEWS-OS 4.2.1aRD : Installation Method Selection @@@@
+
+	  Enter desired installation method :
+
+		[a] Installation (standard)
+		[b] Version up installation
+		[c] Installation (using Configuration Info)
+		[d] Installation (default configuration)
+		[e] Quit[4;48H\00\00\00\00\00a
+
+		[7m\00\00[a][m\00\00[12;11H\00\00\00\00\00OK(y/n/R) ? [;H[2J\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00
+		@@@@  NEWS-OS 4.2.1aRD : Console Type Selection  @@@@
+
+	  Enter console type :
+
+		[a] Bitmap Display	[c] VT-100
+		[b] HDTV			[d] Other[4;33H\00\00\00\00\00d[7;41H\00\00\00\00\00[7m\00\00[d][m\00\00
+
+	  OK(y/n/R) ?  [;H[2J\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00
+		@@@@  NEWS-OS 4.2.1aRD : Language Selection  @@@@
+
+	  Enter language :
+
+		[a] Japanese_Shift-Jis
+		[b] Japanese_EUC
+		[c] European
+		[d] Korean
+		[e] Chinese
+		[f] US_English[4;29H\00\00\00\00\00f[11;15H\00\00\00\00\00[7m\00\00[f][m\00\00
+
+	  OK(y/n/R) ?  [4;17H\00\00\00\00\00country of timezone:
+
+		] JAPAN (Japan)[K\00\00\00
+		] USA[K\00\00\00
+		] EUROPE  
+		] KOREA (ROK)
+		] CHINA (ROC)
+		[K\00\00\00
+
+	  [K\00\00\00[4;39H\00\00\00\00\00b
+
+
+		[7m\00\00[b][m\00\00
+
+
+
+
+	  OK(y/n/R) ?  [4;17H\00\00\00\00\00timezone : [K\00\00\00
+
+		] US/Eastern   
+		[b] US/Central
+		] US/Mountain
+		] US/Pacific 
+		] US/Yukon   
+		[f] Other
+	  [K\00\00\00[4;29H\00\00\00\00\00d[9;15H\00\00\00\00\00[7m\00\00[d][m\00\00
+
+
+
+	  OK(y/n/R) ?  y[;H[2J\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00
+		@@@@  NEWS-OS 4.2.1aRD : Setting Date and Time  @@@@
+
+	  Enter Date & Time (yymmddhhmm[CR]) =	
+
+		Fri Sep 25 15:03:25 PDT 1998
+
+	  OK(y/n/R) ?  [2;14H\00\00\00\00\00[K\00\00\00
+
+	  [K\00\00\00
+
+		[K\00\00\00
+
+	  [K\00\00\00[H[;H[2J\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00
+	 @@@@  NEWS-OS 4.2.1aRD : Specify Installation Partitions  @@@@
+
+
+	  [0:sd01] Disktype = "b0i0u0_2040"
+
+	  Use all disklabels specified above (y/n/R) ?  y[5;11H\00\00\00\00\00Mount "/usr" to local(y) or NFS(n) filesystem (y/n/R) ?
+
+	  [K\00\00\00[5;67H\00\00\00\00\00 y
+	[0:sd00] 18874368(blk)   <a>   <b>   <c>   <d>   <e>   <f>   <g>	 <h>
+		[9437184(KB)]   [7m\00\00root[m\00\00  [7m\00\00swap[m\00\00  [7m\00\00 - [m\00\00	[7m\00\00tmp[m\00\00   [7m\00\00var[m\00\00   [7m\00\00exp[m\00\00		[7m\00\00usr[m\00\00
+	[1:sd01] 4178874(blk)   <a>   <b>	  <c>	<d>   <e>   <f>	  <g>	<h>
+		[2089437(KB)]
+
+	Enter Hard Disk Number to be Installed :	
+	[K\00\00\00[6;64H\00\00\00\00\00
+
+
+
+	Use the default Installation Partitions (y/n/R) ? 
+	Enter Install Partitions :[K\00\00\00
+
+	(usr)=	  -    (var)=	 -    (tmp)=	-    (export)=	  -
+		 0 -  f		0 -  e		0	-  d		 0 -  h[6;61H\00\00\00\00\00[7m\00\00usr[m\00\00		[7m\00\00exp[m\00\00[14;7H\00\00\00\00\00OK(y/n/R) ?  [;H[2J\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00
+	@@@@  NEWS-OS 4.2.1aRD : Selecting Installation Functions  @@@@
+
+    [0] network	 (11194k)    [e] man	  (10033k)    [s] plot	   (1032k)
+    [1] X11-core (24338k)    [f] jman	  (9556k)	[t] 3D	   (3780k)
+    [2] X11-appl (24675k)    [g] doc	  (37782k)    [u] sound	   (2454k)
+    [3] X11-devl (28071k)    [h] lbpfil	  (4193k)	[v] fax	   (5659k)
+    [4] X11-font (6522k)	[i] font533  (3583k)	[w] uucp	   (1064k)
+    [5] X11-demo (8856k)	[j] fontlbp8 (1842k)	[x] AppleTalk(3111k)
+    [6] X11R4-BC (15888k)    [k] fontxp	  (1121k)	[y] snmp	   (15729k)
+    [7] NEWS Desk(17463k)    [l] cdff	  (6611k)	[z] isdn	   (2479k)
+    [8] sys	 (6084k)	[m] image	  (4886k)	[A] fddi	   (1637k)
+    [9] diskless (32608k)    [n] mh	  (7846k)	[B] games	   (2466k)
+    [a] cc	 (12858k)    [o] sj2/3	  (5448k)	[C] learn	   (875k)
+    [b] cc2.0	 (11314k)    [p] roff	  (1477k)	[D] FreeSW   (46788k)
+    [c] cc68	 (2054k)	[q] dict	  (4203k)	[E] FreeSWsrc(81504k)
+    [d] rcs	 (4814k)	[r] cgi	  (2487k)	[F] sample   (7618k)[21;14H\00\00\00\00\00<Function Contents>
+
+			[7m\00\00TOTAL[m\00\00 =	    0 kbyte [ Max 7539571 kbyte ][21;33H\00\00\00\00\00[23;38H\00\00\00\00\00[19;14H\00\00\00\00\00Enter the Function Character =  [4;5H\00\00\00\00\00[7m\00\00[0][m\00\00[23;33H\00\00\00\00\0011194[21;15H\00\00\00\00\00Network commands> [19;45H\00\00\00\00\000[5;5H\00\00\00\00\00[7m\00\00[1][m\00\00[23;33H\00\00\00\00\0035532[21;15H\00\00\00\00\00X11R5 core system: server, fonts, clients>[19;45H\00\00\00\00\001[6;5H\00\00\00\00\00[7m\00\00[2][m\00\00[23;33H\00\00\00\00\0060207[21;21H\00\00\00\00\00application system: clients>[K\00\00\00[19;45H\00\00\00\00\002[7;5H\00\00\00\00\00[7m\00\00[3][m\00\00[23;33H\00\00\00\00\0088278[21;21H\00\00\00\00\00development		library and header files>[19;45H\00\00\00\00\003[8;5H\00\00\00\00\00[7m\00\00[4][m\00\00[23;33H\00\00\00\00\0094800[21;21H\00\00\00\00\00fonts>[K\00\00\00[19;45H\00\00\00\00\004[9;5H\00\00\00\00\00[7m\00\00[5][m\00\00[23;32H\00\00\00\00\00103656[21;21H\00\00\00\00\00demo clients>[19;45H\00\00\00\00\005[10;5H\00\00\00\00\00[7m\00\00[6][m\00\00[23;33H\00\00\00\00\0019544[21;19H\00\00\00\00\004 fonts and old clients (for compatibility)>[19;45H\00\00\00\00\006[11;5H\00\00\00\00\00[7m\00\00[7][m\00\00[23;33H\00\00\00\00\0037007[21;15H\00\00\00\00\00Desktop environment for X11R5>[K\00\00\00[19;45H\00\00\00\00\007[12;5H\00\00\00\00\00[7m\00\00[8][m\00\00[23;33H\00\00\00\00\0043091[21;15H\00\00\00\00\00Object files required to reconfigure the kernel>[19;45H\00\00\00\00\008[13;5H\00\00\00\00\00[7m\00\00[9][m\00\00[23;33H\00\00\00\00\0075699[21;15H\00\00\00\00\00Kernel for diskless workstations, etc.>[K\00\00\00[19;45H\00\00\00\00\009[14;5H\00\00\00\00\00[7m\00\00[a][m\00\00[23;33H\00\00\00\00\0088557[21;15H\00\00\00\00\00C compile	 (ver. 2.11), header files, and library>[19;45H\00\00\00\00\00a[15;5H\00\00\00\00\00[7m\00\00[b][m\00\00[23;33H\00\00\00\00\0099871[21;34H\00\00\00\00\000), header files, and library> [19;45H\00\00\00\00\00b[16;5H\00\00\00\00\00[7m\00\00[c][m\00\00[23;32H\00\00\00\00\00201925[21;16H\00\00\00\00\00ross-compiler for mc680x0>[K\00\00\00[19;45H\00\00\00\00\00c[17;5H\00\00\00\00\00[7m\00\00[d][m\00\00[23;34H\00\00\00\00\006739[21;15H\00\00\00\00\00Revision control system commands>[19;45H\00\00\00\00\00d[4;30H\00\00\00\00\00[7m\00\00[e][m\00\00[23;33H\00\00\00\00\0016772[21;15H\00\00\00\00\00Online manual (English)>[K\00\00\00[19;45H\00\00\00\00\00e[5;30H\00\00\00\00\00[7m\00\00[f][m\00\00[23;33H\00\00\00\00\0026328[21;30H\00\00\00\00\00Japanese)>[19;45H\00\00\00\00\00f[6;30H\00\00\00\00\00[7m\00\00[g][m\00\00[23;33H\00\00\00\00\0064110[21;22H\00\00\00\00\00documentation>[K\00\00\00[19;45H\00\00\00\00\00g[7;30H\00\00\00\00\00[7m\00\00[h][m\00\00[23;34H\00\00\00\00\008303[21;15H\00\00\00\00\00Filter for lbp output>[19;45H\00\00\00\00\00h[8;30H\00\00\00\00\00[7m\00\00[i][m\00\00[23;33H\00\00\00\00\0071886[21;16H\00\00\00\00\00onts for the NWP-533/537/543/550>[19;45H\00\00\00\00\00i[9;30H\00\00\00\00\00[7m\00\00[j][m\00\00[23;34H\00\00\00\00\003728[21;29H\00\00\00\00\00LB	8>[K\00\00\00[19;45H\00\00\00\00\00j[10;30H\00\00\00\00\00[7m\00\00[k][m\00\00[23;34H\00\00\00\00\004849[21;25H\00\00\00\00\00xprev>[K\00\00\00[19;45H\00\00\00\00\00k[11;30H\00\00\00\00\00[7m\00\00[l][m\00\00[23;33H\00\00\00\00\0081460[21;15H\00\00\00\00\00CDFF (Common Document File Format) filter and library>[19;45H\00\00\00\00\00l[12;30H\00\00\00\00\00[7m\00\00[m][m\00\00[23;34H\00\00\00\00\006346[21;15H\00\00\00\00\00Image processing commands> [K\00\00\00[19;45H\00\00\00\00\00m[13;30H\00\00\00\00\00[7m\00\00[n][m\00\00[23;33H\00\00\00\00\0094192[21;15H\00\00\00\00\00Message handler> [K\00\00\00[19;45H\00\00\00\00\00n[14;30H\00\00\00\00\00[7m\00\00[o][m\00\00[23;34H\00\00\00\00\009640[21;15H\00\00\00\00\00Japanese language input front end processors (sj2,sj3,sjx,sjxm)>[19;45H\00\00\00\00\00o[15;30H\00\00\00\00\00[7m\00\00[p][m\00\00[23;32H\00\00\00\00\00301117[21;15H\00\00\00\00\00Text formatting commands>[K\00\00\00[19;45H\00\00\00\00\00p[16;30H\00\00\00\00\00[7m\00\00[q][m\00\00[23;34H\00\00\00\00\005320[21;15H\00\00\00\00\00Dictionary and related commands>[19;45H\00\00\00\00\00q[17;30H\00\00\00\00\00[7m\00\00[r][m\00\00[23;34H\00\00\00\00\007807[21;15H\00\00\00\00\00Cgi library>[K\00\00\00[19;45H\00\00\00\00\00r[4;55H\00\00\00\00\00[7m\00\00[s][m\00\00[23;34H\00\00\00\00\008839[21;15H\00\00\00\00\00Graphic-related library>[19;45H\00\00\00\00\00s[5;55H\00\00\00\00\00[7m\00\00[t][m\00\00[23;33H\00\00\00\00\0012619[21;15H\00\00\00\00\00Library, header files and sample program for NWB-256 (3D board)>[19;45H\00\00\00\00\00t[6;55H\00\00\00\00\00[7m\00\00[u][m\00\00[23;34H\00\00\00\00\005073[21;15H\00\00\00\00\00Sound data processing commands and library>[K\00\00\00[19;45H\00\00\00\00\00u[7;55H\00\00\00\00\00[7m\00\00[v][m\00\00[23;33H\00\00\00\00\0020732[21;15H\00\00\00\00\00Fax-related commands for NWB-239>[K\00\00\00[19;45H\00\00\00\00\00v[8;55H\00\00\00\00\00[7m\00\00[w][m\00\00[23;34H\00\00\00\00\001796[21;15H\00\00\00\00\00Uucp-related commands and library>[19;45H\00\00\00\00\00w[9;55H\00\00\00\00\00[7m\00\00[x][m\00\00[23;34H\00\00\00\00\004907[21;15H\00\00\00\00\00AppleTalk-related commands and daemon>[19;45H\00\00\00\00\00x[10;55H\00\00\00\00\00[7m\00\00[y][m\00\00[23;33H\00\00\00\00\0040636[21;15H\00\00\00\00\00SNMP (Simple Network Management Protocol) related commands>[19;45H\00\00\00\00\00y[11;55H\00\00\00\00\00[7m\00\00[z][m\00\00[23;34H\00\00\00\00\003115[21;15H\00\00\00\00\00ISDN/X.25-related commands and library for NWB-236/236LT>  [19;45H\00\00\00\00\00z[12;55H\00\00\00\00\00[7m\00\00[A][m\00\00[23;34H\00\00\00\00\004752[21;15H\00\00\00\00\00FDDI-related commands for NWB-237>[K\00\00\00\00[19;45H\00\00\00\00\00A[13;55H\00\00\00\00\00[7m\00\00[B][m\00\00[23;34H\00\00\00\00\007218[21;15H\00\00\00\00\00Games (/usr/games)>[K\00\00\00[19;45H\00\00\00\00\00B[14;55H\00\00\00\00\00[7m\00\00[C][m\00\00[23;34H\00\00\00\00\008093[21;15H\00\00\00\00\00Computer-assisted educational software>[19;45H\00\00\00\00\00C[15;55H\00\00\00\00\00[7m\00\00[D][m\00\00[23;33H\00\00\00\00\0094881[21;15H\00\00\00\00\00Free Software (unsupported software)>  [19;45H\00\00\00\00\00D[16;55H\00\00\00\00\00[7m\00\00[E][m\00\00[23;32H\00\00\00\00\00476385[21;29H\00\00\00\00\00sources (unsupported software)>[19;45H\00\00\00\00\00E[17;55H\00\00\00\00\00[7m\00\00[F][m\00\00[23;33H\00\00\00\00\0084003[21;15H\00\00\00\00\00Various demo and sample programs>[K\00\00\00[19;45H\00\00\00\00\00F
+		Above are Selected. Go to next ? (y/n/R) [H
+	[K\00\00\00
+
+    [K\00\00\00
+    [K\00\00\00
+    [K\00\00\00
+    [K\00\00\00
+    [K\00\00\00
+    [K\00\00\00
+    [K\00\00\00
+    [K\00\00\00
+    [K\00\00\00
+    [K\00\00\00
+    [K\00\00\00
+    [K\00\00\00
+    [K\00\00\00
+    [K\00\00\00
+
+		[K\00\00\00
+
+		[K\00\00\00
+
+			[K\00\00\00[H
+	@@@@  NEWS-OS 4.2.1aRD : Altering Partition Size (HD = sd00) @@@@@
+
+	Use the following partition size ? (y/n/R)
+		[(y): Go to next, (n): Alter partition size ]
+		[(R): Return to previous screen ]
+
+	[7m\00\00root[m\00\00 [a]=	 23826 kB |++++
+
+	[7m\00\00swap[m\00\00 [b]=	133760 kB |++++++++++++++++++++++++++
+
+	  [c]= 9437184 kB |+++++++++++++++++++++++++++++++++++++++++|~~|++
+
+	[7m\00\00tmp[m\00\00  [d]=	  7942 kB |+
+
+	[7m\00\00var[m\00\00  [e]=	288499 kB |+++++++++++++++++++++++++++++++++++++++++|~~|++
+
+	[7m\00\00usr[m\00\00  [f]= 8694657 kB |+++++++++++++++++++++++++++++++++++++++++|~~|++[19;63H\00\00\00\00\00(580753 kB)^
+	  [g]= 8991098 kB |+++++++++++++++++++++++++++++++++++++++++|~~|++
+
+	[7m\00\00exp[m\00\00  [h]=	288499 kB |+++++++++++++++++++++++++++++++++++++++++|~~|++[4;52H\00\00\00\00\00[H
+	[K\00\00\00
+
+	[K\00\00\00
+		[K\00\00\00
+		[K\00\00\00
+
+	[K\00\00\00
+
+	[K\00\00\00
+
+	  [K\00\00\00
+
+	[K\00\00\00
+
+	[K\00\00\00
+
+	[K\00\00\00[19;63H\00\00\00\00\00[K\00\00\00
+	  [K\00\00\00
+
+	[K\00\00\00[H
+	[;H[2J\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00
+	@@@@  NEWS-OS 4.2.1aRD : Setting up Network Environment @@@@
+
+	  Do you connect to network (y/n/R) ? y
+
+	  Enter Host name of this machine : mario
+
+	  Enter IP address of "mario" 
+	    [XXX.XXX.XXX.XXX] : 192.168.10.100
+
+	  Enter Netmask of "mario"
+	    [ex. 255.255.255.0] : 255.255.255.0
+
+	    Host name of this machine	= "mario"
+	    IP address of "mario"	= "192.168.10.100"
+	    Netmask of "mario"		= "255.255.255.0"
+
+	    OK(y/n/R) ? y[;H[2J\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00
+	    @@@@  NEWS-OS 4.2.1aRD : Specifing Display Manager	@@@@
+
+	  Use the display manager at login time (y/n/R) ?
+
+		[Yes] Start up the X Window System as default.
+		[No]  Start getty.[4;60H\00\00\00\00\00n
+
+
+		[7m\00\00[No][m\00\00
+
+	  OK(y/n/R) ?  fd00: not ready
+
+	   @@@@	 NEWS-OS 4.2.1aRD : Save the Configuration Info	 @@@@
+
+	  Save the Configuration Info (y/n/R) ?
+
+		[Yes] Save the Configuration Info in the floppy disk.
+		[No]  The Configuration Info is not saved.[4;50H\00\00\00\00\00n
+
+
+		[7m\00\00[No]
+
+	  Start installation. OK(y/n/R) ?
+
+Start installation ....
+
+Warning, partition c: partition extends past end of unit
+
+Warning, partition f: partition extends past end of unit
+
+Warning, partition g: partition extends past end of unit
+
+sd0: PARTITION TABLE CHANGED
+sd0a: nblk=47652, off=0
+sd0b: nblk=267520, off=47652
+sd0c: nblk=18874368, off=0
+sd0d: nblk=15884, off=892171
+sd0e: nblk=576999, off=908055
+sd0f: nblk=17389314, off=1485054
+sd0g: nblk=17982197, off=892171
+sd0h: nblk=576999, off=315172
+Warning: 57 sector(s) in last cylinder unallocated
+/dev/rsd00a:	47652 sectors in 27 cylinders of 19 tracks, 93 sectors
+	24.4MB in 2 cyl groups (16 c/g, 14.48MB/g, 6656 i/g)
+super-block backups (for fsck -b #) at:
+ 32, 28400,
+Warning, partition c: partition extends past end of unit
+
+Warning, partition f: partition extends past end of unit
+
+Warning, partition g: partition extends past end of unit
+
+Warning: inode blocks/cyl group (150) >= data blocks (127) in last
+    cylinder group. This implies 2034 sector(s) cannot be allocated.
+/dev/rsd00f:	17387280 sectors in 9840 cylinders of 19 tracks, 93 sectors
+	8902.3MB in 615 cyl groups (16 c/g, 14.48MB/g, 6656 i/g)
+super-block backups (for fsck -b #) at:
+ 32, 28400, 56768, 85136, 113504, 141872, 170240, 198608, 226976,
+ 255344, 283712, 312080, 340448, 368816, 397184, 425552, 453920, 482288,
+ 510656, 539024, 567392, 595760, 624128, 652496, 680864, 709232, 737600,
+ 765968, 794336, 822704, 851072, 879440, 904736, 933104, 961472, 989840,
+ 1018208, 1046576, 1074944, 1103312, 1131680, 1160048, 1188416, 1216784, 1245152,
+ 1273520, 1301888, 1330256, 1358624, 1386992, 1415360, 1443728, 1472096, 1500464,
+ 1528832, 1557200, 1585568, 1613936, 1642304, 1670672, 1699040, 1727408, 1755776,
+ 1784144, 1809440, 1837808, 1866176, 1894544, 1922912, 1951280, 1979648, 2008016,
+ 2036384, 2064752, 2093120, 2121488, 2149856, 2178224, 2206592, 2234960, 2263328,
+ 2291696, 2320064, 2348432, 2376800, 2405168, 2433536, 2461904, 2490272, 2518640,
+ 2547008, 2575376, 2603744, 2632112, 2660480, 2688848, 2714144, 2742512, 2770880,
+ 2799248, 2827616, 2855984, 2884352, 2912720, 2941088, 2969456, 2997824, 3026192,
+ 3054560, 3082928, 3111296, 3139664, 3168032, 3196400, 3224768, 3253136, 3281504,
+ 3309872, 3338240, 3366608, 3394976, 3423344, 3451712, 3480080, 3508448, 3536816,
+ 3565184, 3593552, 3618848, 3647216, 3675584, 3703952, 3732320, 3760688, 3789056,
+ 3817424, 3845792, 3874160, 3902528, 3930896, 3959264, 3987632, 4016000, 4044368,
+ 4072736, 4101104, 4129472, 4157840, 4186208, 4214576, 4242944, 4271312, 4299680,
+ 4328048, 4356416, 4384784, 4413152, 4441520, 4469888, 4498256, 4523552, 4551920,
+ 4580288, 4608656, 4637024, 4665392, 4693760, 4722128, 4750496, 4778864, 4807232,
+ 4835600, 4863968, 4892336, 4920704, 4949072, 4977440, 5005808, 5034176, 5062544,
+ 5090912, 5119280, 5147648, 5176016, 5204384, 5232752, 5261120, 5289488, 5317856,
+ 5346224, 5374592, 5402960, 5428256, 5456624, 5484992, 5513360, 5541728, 5570096,
+ 5598464, 5626832, 5655200, 5683568, 5711936, 5740304, 5768672, 5797040, 5825408,
+ 5853776, 5882144, 5910512, 5938880, 5967248, 5995616, 6023984, 6052352, 6080720,
+ 6109088, 6137456, 6165824, 6194192, 6222560, 6250928, 6279296, 6307664, 6332960,
+ 6361328, 6389696, 6418064, 6446432, 6474800, 6503168, 6531536, 6559904, 6588272,
+ 6616640, 6645008, 6673376, 6701744, 6730112, 6758480, 6786848, 6815216, 6843584,
+ 6871952, 6900320, 6928688, 6957056, 6985424, 7013792, 7042160, 7070528, 7098896,
+ 7127264, 7155632, 7184000, 7212368, 7237664, 7266032, 7294400, 7322768, 7351136,
+ 7379504, 7407872, 7436240, 7464608, 7492976, 7521344, 7549712, 7578080, 7606448,
+ 7634816, 7663184, 7691552, 7719920, 7748288, 7776656, 7805024, 7833392, 7861760,
+ 7890128, 7918496, 7946864, 7975232, 8003600, 8031968, 8060336, 8088704, 8117072,
+ 8142368, 8170736, 8199104, 8227472, 8255840, 8284208, 8312576, 8340944, 8369312,
+ 8397680, 8426048, 8454416, 8482784, 8511152, 8539520, 8567888, 8596256, 8624624,
+ 8652992, 8681360, 8709728, 8738096, 8766464, 8794832, 8823200, 8851568, 8879936,
+ 8908304, 8936672, 8965040, 8993408, 9021776, 9047072, 9075440, 9103808, 9132176,
+ 9160544, 9188912, 9217280, 9245648, 9274016, 9302384, 9330752, 9359120, 9387488,
+ 9415856, 9444224, 9472592, 9500960, 9529328, 9557696, 9586064, 9614432, 9642800,
+ 9671168, 9699536, 9727904, 9756272, 9784640, 9813008, 9841376, 9869744, 9898112,
+ 9926480, 9951776, 9980144, 10008512, 10036880, 10065248, 10093616, 10121984, 10150352,
+ 10178720, 10207088, 10235456, 10263824, 10292192, 10320560, 10348928, 10377296, 10405664,
+ 10434032, 10462400, 10490768, 10519136, 10547504, 10575872, 10604240, 10632608, 10660976,
+ 10689344, 10717712, 10746080, 10774448, 10802816, 10831184, 10856480, 10884848, 10913216,
+ 10941584, 10969952, 10998320, 11026688, 11055056, 11083424, 11111792, 11140160, 11168528,
+ 11196896, 11225264, 11253632, 11282000, 11310368, 11338736, 11367104, 11395472, 11423840,
+ 11452208, 11480576, 11508944, 11537312, 11565680, 11594048, 11622416, 11650784, 11679152,
+ 11707520, 11735888, 11761184, 11789552, 11817920, 11846288, 11874656, 11903024, 11931392,
+ 11959760, 11988128, 12016496, 12044864, 12073232, 12101600, 12129968, 12158336, 12186704,
+ 12215072, 12243440, 12271808, 12300176, 12328544, 12356912, 12385280, 12413648, 12442016,
+ 12470384, 12498752, 12527120, 12555488, 12583856, 12612224, 12640592, 12665888, 12694256,
+ 12722624, 12750992, 12779360, 12807728, 12836096, 12864464, 12892832, 12921200, 12949568,
+ 12977936, 13006304, 13034672, 13063040, 13091408, 13119776, 13148144, 13176512, 13204880,
+ 13233248, 13261616, 13289984, 13318352, 13346720, 13375088, 13403456, 13431824, 13460192,
+ 13488560, 13516928, 13545296, 13570592, 13598960, 13627328, 13655696, 13684064, 13712432,
+ 13740800, 13769168, 13797536, 13825904, 13854272, 13882640, 13911008, 13939376, 13967744,
+ 13996112, 14024480, 14052848, 14081216, 14109584, 14137952, 14166320, 14194688, 14223056,
+ 14251424, 14279792, 14308160, 14336528, 14364896, 14393264, 14421632, 14450000, 14475296,
+ 14503664, 14532032, 14560400, 14588768, 14617136, 14645504, 14673872, 14702240, 14730608,
+ 14758976, 14787344, 14815712, 14844080, 14872448, 14900816, 14929184, 14957552, 14985920,
+ 15014288, 15042656, 15071024, 15099392, 15127760, 15156128, 15184496, 15212864, 15241232,
+ 15269600, 15297968, 15326336, 15354704, 15380000, 15408368, 15436736, 15465104, 15493472,
+ 15521840, 15550208, 15578576, 15606944, 15635312, 15663680, 15692048, 15720416, 15748784,
+ 15777152, 15805520, 15833888, 15862256, 15890624, 15918992, 15947360, 15975728, 16004096,
+ 16032464, 16060832, 16089200, 16117568, 16145936, 16174304, 16202672, 16231040, 16259408,
+ 16284704, 16313072, 16341440, 16369808, 16398176, 16426544, 16454912, 16483280, 16511648,
+ 16540016, 16568384, 16596752, 16625120, 16653488, 16681856, 16710224, 16738592, 16766960,
+ 16795328, 16823696, 16852064, 16880432, 16908800, 16937168, 16965536, 16993904, 17022272,
+ 17050640, 17079008, 17107376, 17135744, 17164112, 17189408, 17217776, 17246144, 17274512,
+ 17302880, 17331248, 17359616,
+Warning: Block size restricts cylinders per group to 8.
+Warning: 810 sector(s) in last cylinder unallocated
+/dev/rsd00e:	576999 sectors in 327 cylinders of 19 tracks, 93 sectors
+	295.4MB in 41 cyl groups (8 c/g, 7.24MB/g, 3104 i/g)
+super-block backups (for fsck -b #) at:
+ 32, 14264, 28496, 42728, 56960, 71192, 85424, 99656, 113888,
+ 128120, 142352, 156584, 170816, 185048, 199280, 213512, 227744, 241976,
+ 256208, 270440, 284672, 298904, 313136, 327368, 341600, 355832, 370064,
+ 384296, 398528, 412760, 426992, 441224, 452384, 466616, 480848, 495080,
+ 509312, 523544, 537776, 552008, 566240,
+Warning: 19 sector(s) in last cylinder unallocated
+/dev/rsd00d:	15884 sectors in 9 cylinders of 19 tracks, 93 sectors
+	8.1MB in 1 cyl groups (16 c/g, 14.48MB/g, 6656 i/g)
+super-block backups (for fsck -b #) at:
+ 32,
+Warning: 811 sector(s) in last cylinder unallocated
+/dev/rsd00h:	576998 sectors in 327 cylinders of 19 tracks, 93 sectors
+	295.4MB in 21 cyl groups (16 c/g, 14.48MB/g, 6656 i/g)
+super-block backups (for fsck -b #) at:
+ 32, 28400, 56768, 85136, 113504, 141872, 170240, 198608, 226976,
+ 255344, 283712, 312080, 340448, 368816, 397184, 425552, 453920, 482288,
+ 510656, 539024, 567392,
+**** /dev/sd00a mounted on Root filesystem ****
+**** /dev/sd00e mounted on Var filesystem ****
+**** /dev/sd00f mounted on Usr filesystem ****
+	Install Basic root /usr /var       	... end
+	network       	... end
+	Install vmunix (for NWS-5000)       	... end
+	sys       	... end
+	diskless       	... end
+	X11_core       	... end
+	X11_appl       	... end
+	X11_devl       	... end
+	X11_fontstdin: not in compressed format
+tar: blocksize = 0
+       	... end
+	X11_demo       	... end
+	X11R4_BCstdin: not in compressed format
+tar: blocksize = 0
+       	... end
+	NEWSdesk       	... end
+	cc       	... end
+	cc20       	... end
+	cc68       	... end
+	man       	... end
+	jman       	... end
+	doc       	... end
+	lbpfil       	... end
+	font533       	... end
+	fontlbp8       	... end
+	fontxp       	... end
+	cdff       	... end
+	image       	... end
+	sj2_3       	... end
+	roff       	... end
+	rcs       	... end
+	mh       	... end
+	dict       	... end
+	cgi       	... end
+	plot       	... end
+	3D       	... end
+	sound       	... end
+	fax       	... end
+	uucp       	... end
+	isdn       	... end
+	snmp       	... end
+	AppleTalk       	... end
+	fddi       	... end
+	games       	... end
+	learn       	... end
+	sample       	... end
+	FreeSWstdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+       	... end
+	FreeSWsrcstdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+stdin: not in compressed format
+tar: blocksize = 0
+       	... end
+
+Install Complete
+
+
+syncing file systems... done
+Halt
+> bo
+APbus Primary Boot Program
+APbus Full Boot Program (0x83e00000-0x83e153df)
+: scsi(0,0)/vmunix
+text_start=0x80001000, data_start=0x8016b360, entry=0x80001a08
+.text:	address=0x80001000-0x8016b35f, size=1483616  .oO.oO.oO.oO.oO.oO.oO.o 
+.rdata:	address=0x8016b360-0x8016ff7f, size=19488  . 
+.data:	address=0x8016ff80-0x801a554f, size=218576  .oO. 
+.sdata:	address=0x801a5550-0x801adf6f, size=35360  . 
+.sbss:	address=0x801adf70-0x801af19f, size=4656   
+.bss:	address=0x801af1a0-0x8039ee7f, size=2030816   
+SONY NET WORK STATION, Model NWS-5000, Machine ID #14167
+
+NEWS-OS Release 4.2.1R FCS#2 #0: Mon Jun 28 20:27:05 JST 1993
+
+    root@wsrel11:/MAKE4.XR/src/sys/NEWS5000
+
+Copyright (c) 1990, 1991, 1992, 1993 Sony Corporation
+
+All Rights Reserved
+
+real mem  = 67108864
+
+          = 64 MB
+
+primary data cache        : 16 KB
+
+primary instruction cache : 16 KB
+
+secondary cache (unified) : 1024 KB
+
+avail mem = 60743680
+
+using max. 11593 buffers, 47484928 bytes [dynamic allocate buffer]
+
+spifi0 at ap0 slot0 addr be280000 priority 0
+
+SCSI0 Initialization...   10 9 8 7 6 5 4 3 2 1done
+
+sd0 at spifi0 slave 0	(bus=0, chan=0, lun=0)
+
+sd0: UNKNOWN
+
+sd1 at spifi0 slave 1	(bus=0, chan=1, lun=0)
+
+sd1: UNKNOWN
+
+sd3 at spifi0 slave 3	(bus=0, chan=3, lun=0)
+
+sd3: CD-ROM (type B)
+
+sd4 at spifi0 slave 4	(bus=0, chan=4, lun=0)
+
+sd4: CD-ROM (type B)
+
+spifi1 at ap0 slot0 addr be380000 priority 0
+
+SCSI1 Initialization...   10 9 8 7 6 5 4 3 2 1done
+
+spifi0 at ap0 slot0 addr be280000 priority 0
+
+spifi1 at ap0 slot0 addr be380000 priority 0
+
+spifi0 at ap0 slot0 addr be280000 priority 0
+
+spifi1 at ap0 slot0 addr be380000 priority 0
+
+fd0 at ap0 slot0 addr bed20000 priority 34
+
+fdd0 at fd0 slave 0
+
+sonic0 at ap0 slot0 addr be600000 priority 16
+
+en0: hardware address 08:00:46:00:fe:e6
+
+bpf: en0 attached
+
+esccf0 at ap0 slot0 addr be900000 priority 22
+
+rs0 attach esccf0 async driver
+
+lp0 at ap0 slot0 addr bed30000 priority 24
+
+kb0 at ap0 slot0 addr bf900000 priority 36
+
+kb0: NWP-410/411
+
+ms0 at ap0 slot0 addr bf900014 priority 40
+
+sb0 at ap0 slot0 addr bed00000 priority 44
+
+bpf: sl0 attached
+
+bpf: sl1 attached
+
+bpf: lo0 attached
+
+bpf: at0 attached
+
+root fstype 4.3 (sd0a)
+
+swap fstype spec (sd0b, 133760KB)
+
+swap fstype spec (sd1b, 131072KB)
+
+Automatic reboot in progress...
+Fri Sep 25 15:29:56 PDT 1998
+/dev/sd00a: 1235 files, 4985 used, 17128 free
+/dev/sd00a: (24 frags, 2138 blocks, 0.1% fragmentation)
+/dev/rsd00d: 2 files, 9 used, 7068 free
+/dev/rsd00d: (20 frags, 881 blocks, 0.3% fragmentation)
+/dev/rsd00h: 2 files, 9 used, 270665 free
+/dev/rsd00h: (17 frags, 33831 blocks, 0.0% fragmentation)
+/dev/rsd00e: 143 files, 268 used, 543897 free
+/dev/rsd00e: (225 frags, 67959 blocks, 0.0% fragmentation)
+/dev/rsd00f: 16871 files, 340170 used, 7831924 free
+/dev/rsd00f: (6404 frags, 978190 blocks, 0.1% fragmentation)
+Fri Sep 25 15:36:54 PDT 1998
+en0: flags=63<UP,BROADCAST,NOTRAILERS,RUNNING> mtu 1500
+	inet 192.168.10.100 netmask ffffff00 broadcast 192.168.10.255
+lo0: flags=9<UP,LOOPBACK> mtu 1536
+	inet 127.0.0.1 netmask ff000000 
+starting port mapper
+starting rpc services:.
+starting system logger
+Exporting filesystems...
+exported /usr
+exported /export
+done.
+starting network daemons: sendmail nfsd biod statd lockd rwhod snmpd automount.
+checking quotas: done.
+preserving editor files
+clearing /tmp
+standard daemons: cron accounting inetd.
+starting local daemons: printer consd powerd.
+Fri Sep 25 15:37:00 PDT 1998
+
+Copyright (c) 1990, 1991, 1992, 1993 Sony Corporation
+All Rights Reserved
+
+Unix System V Release 2.0: AT&T Technologies, Inc.
+Unix Documenter's Workbench software Release 1.0: AT&T Technologies, Inc.
+Unix 4.2 and 4.3 BSD: University of California, Berkeley.
+UMIPS-BSD: MIPS Computer Systems, Inc.
+RISCompiler: MIPS Computer Systems, Inc.
+NFS: Sun Microsystems, Inc.
+AppleTalk (TM) Software: Apple Computer, Inc.
+X Window System: Massachusetts Institute of Technology
+OSF/Motif: Open Software Foundation, Inc.
+Simple Network Management Protocol: Performance Systems International, Inc.
+Unix 4.2 BSD Kanji Processing Program and ASCII UX/4.3 BSD: ASCII Corporation
+X Window Previewer for ditroff: ASCII Corporation
+CANON LASER BEAM PRINTER LBP-8 Printer driver for ditroff: ASCII Corporation
+CGI: Software Research Associates, Inc. and Sony Corporation
+In House Printing: Software Research Associates, Inc. and Sony Corporation
+Kana-Kanji Modules, dictionary, utility: ERGOSOFT Corp.
+Kanji Font Data: Japan Information & Science, Inc.
+Bitmap Kanji Font/TB Mincho M: TYPE BANK CO., LTD.
+
+Sep 25 15:37:01 mario syslog: ioctl: CNIOCDAEMON: Inappropriate ioctl for device
+
+
+
+NEWS-OS Release 4.2.1R FCS#2 (mario) (console)
+
+
+
+login: root
+Sep 25 15:40:06 mario login: ROOT LOGIN console
+
+NEWS-OS Release 4.2.1R FCS#2 #0: Mon Jun 28 20:27:05 JST 1993
+
+[1;24r[24;1H
+Terminal type is vt100
+Ttype is ascii
+Erase set to Backspace
+Kill set to Ctrl-X
+Interrupt is Ctrl-C
+mario# 

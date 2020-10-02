@@ -48,7 +48,10 @@ session as the login application.
 
 To launch a display manager automatically at system boot time, run the `dmset` command.
 `dmset` alone will set the default to `sxdm`, `dmset -x` will set it to `xdm`, and `dmset -n`
-will disable X11 display manager auto-launch.
+will disable X11 display manager auto-launch. `dmset` also edits `/etc/ttys` to disable
+console login, so if you want to continue to have console login access, either revert `/etc/ttys`
+after running `dmset`, or edit the line `DM=` in `/etc/rc.custom` to be `DM=sxdm` or `DM=xdm`
+instead of running `dmset`.
 
 ### Enabling Japanese text rendering
 NEWS-OS has its own Japanese fonts. Modern installs of X11 don't include them.
