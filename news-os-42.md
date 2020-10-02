@@ -82,3 +82,18 @@ have man pages in English and Japanese available, but in brief:
 There are additional components (`sjx` for X11, `sj3dic` for managing custom
 conversion dictionaries) as well as older utilities (`sj2`, `sj2dic`) that may
 be available depending on what settings were selected during installation.
+
+## Rebuilding the NEWS-OS kernel
+Like modern Unix and Linux systems, the kernel can be rebuilt with configuration changes.
+```csh
+# Switch to kernel configuration directory
+% cd /sys/conf
+# Edit the desired parameters in /sys/conf/NEWS5000
+# Execute the required config and make commands
+% config NEWS5000
+% cd ../NEWS5000
+% make depend
+% make
+```
+After running make, the new kernel, `vmunix`, will be available and can be loaded from the ROM monitor, or placed at
+`/vmunix`. After reboot, the kernel build date should match when `make` was run (per NEWS system clock).
