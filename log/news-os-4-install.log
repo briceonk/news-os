@@ -47,7 +47,7 @@ ss [ -adflmnprsvx ]                               : show system status
 term [ <baud> ]                                   : terminal emulator
 unset <var>                                       : unset variable
 vers [ -s ]                                       : show system version
-> bo scsi(,0 40)
+> bo scsi(,40)
 APbus CD-ROM Primary Boot Program
 
 NEWS-OS Install Program Release 4.3000
