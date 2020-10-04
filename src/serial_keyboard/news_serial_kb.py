@@ -25,7 +25,7 @@ class NewsSerialKeyboardConverter:
         'f1': '01', 'f2': '02', 'f3': '03', 'f4': '04', 'f5': '05', 'f6': '06', 'f7': '07', 'f8': '08', 'f9': '09',
         'f10': '0A', 'f11': '68', 'f12': '69',
         # First 3 mathematical operators
-        'P*': '64', 'P*--1÷': '65', 'P+': '52',
+        'P×': '64', 'P÷': '65', 'P+': '52',
         # Escape
         'ESC': '0B',
         # Numbers
@@ -62,12 +62,21 @@ class NewsSerialKeyboardConverter:
         keyboard.start_recording(self.in_q)
         self.news_sp = sp
 
+    @staticmethod
+    def clean_key_name(key_name):
+        # So far, only found the minus sign, but I put this into a function in case it needs to be expanded.
+        result = key_name
+        if key_name == b'\xe2\x88\x92'.decode("utf-8"):  # keyboard module returns some unicode - instead of ASCII
+            result = "-"
+        return result
+
     def main(self):
         try:
             with serial.Serial(port=self.news_sp) as sp:
                 while True:
                     key_input = self.in_q.get(block=True)  # type: keyboard.KeyboardEvent
                     key_name = key_input.name if not key_input.is_keypad else "P" + key_input.name
+                    key_name = self.clean_key_name(key_name)
                     try:
                         news_key_code = bytes.fromhex(self.nwp5461_map[key_name])
                     except KeyError:
