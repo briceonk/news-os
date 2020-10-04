@@ -21,5 +21,6 @@ to do various tasks when working with my NWS-5000X.
 - [ozuma's NEWS 5000x operations page](http://ozuma.o.oo7.jp/nws5000x.htm)
 - [Sony NEWS hardware info](https://katsu.watanabe.name/doc/sonynews/)
 - [NEWS World](https://web.archive.org/web/20170202100940/www3.videa.or.jp/NEWS/)
+- [NEWS Keyboard Converter](https://github.com/tmk/tmk_keyboard/tree/master/converter/news_usb)
 - [NetBSD newsmips page](http://wiki.netbsd.org/ports/newsmips/)
 - [NetBSD news68k page](http://wiki.netbsd.org/ports/news68k/)
