@@ -1,7 +1,10 @@
 import queue
-import keyboard
+import argparse
+
+# 3rd-party libraries
+# Run `pip install pyserial keyboard` to install
 import serial
-import binascii
+import keyboard
 
 
 class NewsSerialKeyboardConverter:
@@ -80,4 +83,7 @@ class NewsSerialKeyboardConverter:
 
 
 if __name__ == "__main__":
-    NewsSerialKeyboardConverter("/dev/ttyUSB1").main()  # TODO: command line parameter
+    parser = argparse.ArgumentParser()
+    parser.add_argument("serial_port", help="Path to USB->TTL device (like /dev/ttyUSB0)")
+    args = parser.parse_args()
+    NewsSerialKeyboardConverter(args.serial_port).main()
