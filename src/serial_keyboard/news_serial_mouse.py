@@ -36,20 +36,20 @@ class NewsSerialKeyboardConverter:
     functionality.
 
     3-byte mouse protocol spec (NEWS-OS 4.2.1aR) from /sys/newsapbus/msreg.h:
-    #define MS_S_BYTE	0		/* start byte */
-    #define MS_X_BYTE	1		/* second byte */
-    #define MS_Y_BYTE	2		/* third byte */
-    #define MS_DB_SIZE	3
+    #define MS_S_BYTE   0   /* start byte */
+    #define MS_X_BYTE   1   /* second byte */
+    #define MS_Y_BYTE   2   /* third byte */
+    #define MS_DB_SIZE  3
 
-    #define MS_S_MARK	0x80		/* start mark (first byte)*/
-    #define MS_S_X7		0x08		/* MSB(sign bit) of X */
-    #define MS_S_Y7		0x10		/* MSB(sign bit) of Y */
-    #define MS_S_SW1	0x01		/* left button is pressed */
-    #define MS_S_SW2	0x02		/* right button is pressed */
-    #define MS_S_SW3	0x04		/* middle button is pressed */
+    #define MS_S_MARK   0x80    /* start mark (first byte)*/
+    #define MS_S_X7     0x08    /* MSB(sign bit) of X */
+    #define MS_S_Y7     0x10    /* MSB(sign bit) of Y */
+    #define MS_S_SW1    0x01    /* left button is pressed */
+    #define MS_S_SW2    0x02    /* right button is pressed */
+    #define MS_S_SW3    0x04    /* middle button is pressed */
 
-    #define MS_X_X06	0x7f		/* data bits of X (second byte) */
-    #define MS_Y_Y06	0x7f		/* data bits of Y (third byte) */
+    #define MS_X_X06    0x7f    /* data bits of X (second byte) */
+    #define MS_Y_Y06    0x7f    /* data bits of Y (third byte) */
     """
 
     # MS_S_BYTE
