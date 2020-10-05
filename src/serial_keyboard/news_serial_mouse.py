@@ -1,13 +1,27 @@
 import argparse
-import functools
 import binascii
+import functools
+import collections
 
 # 3rd-party libraries
 # Run `pip install pyserial mouse` to install
+import threading
 import time
 
 import serial
 import mouse
+
+
+class MouseState:
+    def __init__(self, x=0, y=0, left=False, right=False, middle=False):
+        self.x = x
+        self.y = y
+        self.left = left
+        self.right = right
+        self.middle = middle
+
+    def copy(self):
+        return MouseState(self.x, self.y, self.left, self.right, self.middle)
 
 
 class NewsSerialKeyboardConverter:
@@ -33,6 +47,7 @@ class NewsSerialKeyboardConverter:
     #define MS_X_X06	0x7f		/* data bits of X (second byte) */
     #define MS_Y_Y06	0x7f		/* data bits of Y (third byte) */
     """
+
     # MS_S_BYTE
     MS_S_MARK = b'\x80'
     MS_S_X7 = b'\x08'
@@ -43,53 +58,71 @@ class NewsSerialKeyboardConverter:
     # MS_X_BYTE, MS_Y_BYTE
     MS_DATA = b'\x7f'
 
+    BUFFER_SIZE = 400  # ~1sec worth of data max
+
     def __init__(self, sp):
         self.news_sp = sp
-        self.prev_x = 0
-        self.prev_y = 0
+        self.prev = MouseState()
+        self.cur = MouseState()
+        self.lock = threading.Lock()
 
-    def handle_mouse_event(self, sp, event):
+    def handle_mouse_event(self, event):
+        with self.lock:
+            if type(event) == mouse.ButtonEvent:
+                self.cur.__setattr__(event.button, event.event_type == "down")
+            elif type(event) == mouse.MoveEvent:
+                self.cur.x = event.x
+                self.cur.y = event.y
+
+    @staticmethod
+    def byte_or(a, b):
+        return bytes([a[0] | b[0]])
+
+    @staticmethod
+    def byte_and(a, b):
+        return bytes([a[0] & b[0]])
+
+    def get_update(self):
+        old = self.prev
+        with self.lock:
+            self.prev = self.cur.copy()
+
         start_byte = self.MS_S_MARK
-        x_data = b'\x00'
-        y_data = b'\x00'
-        if type(event) == mouse.ButtonEvent and event.event_type == "down":
-            if event.button == 'left':
-                code = self.MS_S_LEFT
-            elif event.button == 'right':
-                code = self.MS_S_RIGHT
-            else:
-                code = self.MS_S_MIDDLE
-            start_byte = bytes([start_byte[0] | code[0]])
-        if type(event) == mouse.MoveEvent:
-            dx = event.x - self.prev_x
-            dy = event.y - self.prev_y
-            self.prev_x = event.x
-            self.prev_y = event.y
-            if dx > 127:
-                dx = 127
-            elif dx < -128:
-                dx = -128
-            if dy > 127:
-                dy = 127
-            elif dy < -128:
-                dy = -128
-            if dx < 0:
-                start_byte = bytes([start_byte[0] | self.MS_S_X7[0]])
-                dx *= -1
-            if dy < 0:
-                start_byte = bytes([start_byte[0] | self.MS_S_Y7[0]])
-                dy *= -1
-            x_data = bytes([self.MS_DATA[0] & bytes([dx])[0]])
-            y_data = bytes([self.MS_DATA[0] & bytes([dy])[0]])
-        # print("Sending {}".format(binascii.hexlify(start_byte + x_data + y_data)))
-        sp.write(start_byte + x_data + y_data)
+        if self.prev.left:
+            start_byte = self.byte_or(start_byte, self.MS_S_LEFT)
+        if self.prev.right:
+            start_byte = self.byte_or(start_byte, self.MS_S_RIGHT)
+        if self.prev.middle:
+            start_byte = self.byte_or(start_byte, self.MS_S_MIDDLE)
+
+        dx = self.prev.x - old.x
+        dy = self.prev.y - old.y
+        if dx > 127:
+            dx = 127
+        elif dx < -128:
+            dx = -128
+        if dy > 127:
+            dy = 127
+        elif dy < -128:
+            dy = -128
+        if dx < 0:
+            start_byte = self.byte_or(start_byte, self.MS_S_X7)
+            dx *= -1
+        if dy < 0:
+            start_byte = self.byte_or(start_byte, self.MS_S_Y7)
+            dy *= -1
+        x_data = self.byte_and(self.MS_DATA, bytes([dx]))
+        y_data = self.byte_and(self.MS_DATA, bytes([dy]))
+        return start_byte + x_data + y_data
 
     def main(self):
         with serial.Serial(self.news_sp, 1200, write_timeout=0) as sp:
             try:
-                mouse.hook(functools.partial(self.handle_mouse_event, sp))
+                mouse.hook(functools.partial(self.handle_mouse_event))
                 while True:
-                    time.sleep(1.0)
+                    time.sleep(0.05)  # Periodically send updates to avoid overwhelming the serial port (1200bps)
+                    packet = self.get_update()
+                    sp.write(packet)
             finally:
                 mouse.unhook_all()
 
