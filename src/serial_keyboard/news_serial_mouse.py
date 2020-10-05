@@ -110,11 +110,11 @@ class NewsSerialKeyboardConverter:
         if dx < 0:
             start_byte = self.byte_or(start_byte, self.MS_S_X7)
             dx *= -1
-            dx = 128 - dx  # more negative = less movement
+            dx = 128 - dx  # Two's complement
         if dy < 0:
             start_byte = self.byte_or(start_byte, self.MS_S_Y7)
             dy *= -1
-            dy = 128 - dy  # more negative = less movement
+            dy = 128 - dy  # Two's complement
         x_data = self.byte_and(self.MS_DATA, bytes([dx]))
         y_data = self.byte_and(self.MS_DATA, bytes([dy]))
         return start_byte + x_data + y_data
