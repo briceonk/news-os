@@ -30,6 +30,11 @@ class NewsSerialKeyboardConverter:
     The NWS-5000X (and other NEWS machines) use a TTL serial keyboard and mouse. This can be wired up to a USB->TTY
     serial adapter to use a modern PC as a NEWS mouse if, like me, you don't have a compatible serial mouse.
 
+    Before using this in an X-Windows environment, you can use xinput to disable the mouse on your workstation to avoid
+    sending errant mouse events to random applications. Run `xinput list`, then run `xinput --disable <mouse id>`.
+    Then, run this script. When done, break out of this script and run `xinput --enable <mouse id>` to restore mouse
+    functionality.
+
     3-byte mouse protocol spec (NEWS-OS 4.2.1aR) from /sys/newsapbus/msreg.h:
     #define MS_S_BYTE	0		/* start byte */
     #define MS_X_BYTE	1		/* second byte */
@@ -105,11 +110,11 @@ class NewsSerialKeyboardConverter:
         if dx < 0:
             start_byte = self.byte_or(start_byte, self.MS_S_X7)
             dx *= -1
-            dx = 127 - dx  # more negative = less movement
+            dx = 128 - dx  # more negative = less movement
         if dy < 0:
             start_byte = self.byte_or(start_byte, self.MS_S_Y7)
             dy *= -1
-            dy = 127 - dy  # more negative = less movement
+            dy = 128 - dy  # more negative = less movement
         x_data = self.byte_and(self.MS_DATA, bytes([dx]))
         y_data = self.byte_and(self.MS_DATA, bytes([dy]))
         return start_byte + x_data + y_data
@@ -120,7 +125,9 @@ class NewsSerialKeyboardConverter:
                 mouse.hook(functools.partial(self.handle_mouse_event))
                 while True:
                     time.sleep(0.05)  # Periodically send updates to avoid overwhelming the serial port (1200bps)
-                    sp.write(self.get_update())
+                    packet = self.get_update()
+                    if packet != b'\x80\x00\x00':
+                        sp.write(packet)
             finally:
                 mouse.unhook_all()
 
