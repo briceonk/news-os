@@ -1,13 +1,14 @@
-import binascii
 import time
 import argparse
 import functools
 import threading
 
 # 3rd-party libraries
-# Run `pip install pyserial mouse` to install
+# Run `pip install pyserial` to install Pyserial
+# Run `git submodule init && git submodule update` to clone the modified version of mouse that uses relative coords
+# Ensure that the modified version of mouse is on the path and that it will be used instead of the standard `mouse`
 import serial
-import mouse_mod.mouse as mouse
+import mouse.mouse as mouse
 
 
 class MouseState:
@@ -111,7 +112,6 @@ class NewsSerialKeyboardConverter:
             dy = 127 - dy  # more negative = less movement
         x_data = self.byte_and(self.MS_DATA, bytes([dx]))
         y_data = self.byte_and(self.MS_DATA, bytes([dy]))
-        print("Sending {} {} {}".format(binascii.hexlify(start_byte), binascii.hexlify(x_data), binascii.hexlify(y_data)))
         return start_byte + x_data + y_data
 
     def main(self):

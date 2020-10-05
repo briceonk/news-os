@@ -1,0 +1,3 @@
+[submodule "src/serial_keyboard/mouse"]
+	path = src/serial_keyboard/mouse
+	url = git@github.com:briceonk/mouse.git
