@@ -5,8 +5,8 @@ import threading
 
 # 3rd-party libraries
 # Run `pip install pyserial` to install Pyserial
-# Run `git submodule init && git submodule update` to clone the modified version of mouse that uses relative coords
-# Ensure that the modified version of mouse is on the path and that it will be used instead of the standard `mouse`
+# Run `git submodule init && git submodule update` to clone the modified version of mouse that uses relative instead of
+# absolute positioning. Ensure that the modified version of mouse is on the path/PYTHONPATH instead of the normal mouse.
 import serial
 import mouse.mouse as mouse
 
