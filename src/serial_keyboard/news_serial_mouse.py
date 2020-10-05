@@ -1,3 +1,4 @@
+import binascii
 import time
 import argparse
 import functools
@@ -6,7 +7,7 @@ import threading
 # 3rd-party libraries
 # Run `pip install pyserial mouse` to install
 import serial
-import mouse
+import mouse_mod.mouse as mouse
 
 
 class MouseState:
@@ -66,8 +67,8 @@ class NewsSerialKeyboardConverter:
             if type(event) == mouse.ButtonEvent:
                 self.cur.__setattr__(event.button, event.event_type == "down")
             elif type(event) == mouse.MoveEvent:
-                self.cur.x = event.x
-                self.cur.y = event.y
+                self.cur.x += event.x
+                self.cur.y += event.y
 
     @staticmethod
     def byte_or(a, b):
@@ -78,9 +79,9 @@ class NewsSerialKeyboardConverter:
         return bytes([a[0] & b[0]])
 
     def get_update(self):
-        old = self.prev
         with self.lock:
             self.prev = self.cur.copy()
+            self.cur = MouseState()
 
         start_byte = self.MS_S_MARK
         if self.prev.left:
@@ -90,8 +91,8 @@ class NewsSerialKeyboardConverter:
         if self.prev.middle:
             start_byte = self.byte_or(start_byte, self.MS_S_MIDDLE)
 
-        dx = self.prev.x - old.x
-        dy = self.prev.y - old.y
+        dx = self.prev.x
+        dy = self.prev.y
         if dx > 127:
             dx = 127
         elif dx < -128:
@@ -103,11 +104,14 @@ class NewsSerialKeyboardConverter:
         if dx < 0:
             start_byte = self.byte_or(start_byte, self.MS_S_X7)
             dx *= -1
+            dx = 127 - dx  # more negative = less movement
         if dy < 0:
             start_byte = self.byte_or(start_byte, self.MS_S_Y7)
             dy *= -1
+            dy = 127 - dy  # more negative = less movement
         x_data = self.byte_and(self.MS_DATA, bytes([dx]))
         y_data = self.byte_and(self.MS_DATA, bytes([dy]))
+        print("Sending {} {} {}".format(binascii.hexlify(start_byte), binascii.hexlify(x_data), binascii.hexlify(y_data)))
         return start_byte + x_data + y_data
 
     def main(self):

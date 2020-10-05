@@ -9,7 +9,7 @@ to do various tasks when working with my NWS-5000X.
 - `newsos_cd_extractor.py`: Extracts archives from the NEWS-OS 4.2.1aR CD
 - `xdmcp.py`: Automates launching XDMCP sessions from any machine with Xephyr installed
 - `rarp/`: Docker image which can respond to RARP requests from the NEWS ROM Monitor
-- `serial_keyboard/`: Script for using a modern workstation + USB->TTL adapter to emulate a NEWS serial keyboard
+- `serial_keyboard/`: Script for using a modern workstation + USB->TTL adapters to emulate a NEWS serial mouse and keyboard
 
 ## Pages
 - introduction.md: What is NEWS?
