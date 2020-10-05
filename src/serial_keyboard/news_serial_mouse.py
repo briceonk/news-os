@@ -1,11 +1,10 @@
+import time
 import argparse
 import functools
+import threading
 
 # 3rd-party libraries
 # Run `pip install pyserial mouse` to install
-import threading
-import time
-
 import serial
 import mouse
 
