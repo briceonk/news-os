@@ -1,7 +1,5 @@
 import argparse
-import binascii
 import functools
-import collections
 
 # 3rd-party libraries
 # Run `pip install pyserial mouse` to install
@@ -57,8 +55,6 @@ class NewsSerialKeyboardConverter:
     MS_S_MIDDLE = b'\x04'
     # MS_X_BYTE, MS_Y_BYTE
     MS_DATA = b'\x7f'
-
-    BUFFER_SIZE = 400  # ~1sec worth of data max
 
     def __init__(self, sp):
         self.news_sp = sp
@@ -121,8 +117,7 @@ class NewsSerialKeyboardConverter:
                 mouse.hook(functools.partial(self.handle_mouse_event))
                 while True:
                     time.sleep(0.05)  # Periodically send updates to avoid overwhelming the serial port (1200bps)
-                    packet = self.get_update()
-                    sp.write(packet)
+                    sp.write(self.get_update())
             finally:
                 mouse.unhook_all()
 
