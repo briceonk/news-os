@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import time
 import argparse
 import functools
@@ -23,7 +24,7 @@ class MouseState:
         return MouseState(self.x, self.y, self.left, self.right, self.middle)
 
 
-class NewsSerialKeyboardConverter:
+class NewsSerialMouseConverter:
     """
     Class for running an interactive session that takes characters and transcodes them to NEWS keyboard characters.
 
@@ -136,4 +137,4 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("serial_port", help="Path to USB->TTL device (like /dev/ttyUSB0)")
     args = parser.parse_args()
-    NewsSerialKeyboardConverter(args.serial_port).main()
+    NewsSerialMouseConverter(args.serial_port).main()

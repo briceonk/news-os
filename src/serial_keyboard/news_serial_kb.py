@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import queue
 import argparse
 
