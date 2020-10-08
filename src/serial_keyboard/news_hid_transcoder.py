@@ -256,7 +256,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="")  # TODO: Fill in description
     parser.add_argument("-k", "--keyboard_serial_port", default=None,
                         help="Path to USB->TTL device connected to NEWS KB port")
-    parser.add_argument("-m", "mouse_serial_port", default=None,
+    parser.add_argument("-m", "--mouse_serial_port", default=None,
                         help="Path to USB->TTL device connected to NEWS mouse port")
     parser.add_argument("-d", "--disable_local_mouse", action="store_true", default=False,
                         help="If set, will scan xinput and disable the mouse in the local X environment until the "
