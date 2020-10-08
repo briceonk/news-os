@@ -36,7 +36,7 @@ class NewsSerialKeyboardConverter:
         # First 3 mathematical operators
         'P×': '64', 'P÷': '65', 'P+': '52',
         # Escape
-        'ESC': '0B',
+        'esc': '0B',
         # Numbers
         '1': '0C', '2': '0D', '3': '0E', '4': '0F', '5': '10', '6': '11', '7': '12', '8': '13', '9': '14', '0': '15',
         # Top row special keys  TODO: HELP
