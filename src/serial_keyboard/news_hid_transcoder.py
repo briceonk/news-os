@@ -3,6 +3,8 @@ import re
 import argparse
 import threading
 import subprocess
+import time
+
 import news_serial_kb
 import news_serial_mouse
 
@@ -47,8 +49,13 @@ class NewsHidTranscoder:
             kb_thread.start()
             mouse_thread.start()
             # TODO: handle quitting in a nicer way
-            kb_thread.join()
-            mouse_thread.join()
+            while True:
+                try:
+                    kb_thread.join()
+                    mouse_thread.join()
+                except KeyboardInterrupt:
+                    print("Press Control+C twice more within 1 second to quit.")
+                    time.sleep(1.0)
         finally:
             self.enable_mouse()
 
