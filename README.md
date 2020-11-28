@@ -24,3 +24,4 @@ to do various tasks when working with my NWS-5000X.
 - [NEWS Keyboard Converter](https://github.com/tmk/tmk_keyboard/tree/master/converter/news_usb)
 - [NetBSD newsmips page](http://wiki.netbsd.org/ports/newsmips/)
 - [NetBSD news68k page](http://wiki.netbsd.org/ports/news68k/)
+- [NetBSD newsmips dev blog](http://www.nerv.org/~ryo/d/1999/)
