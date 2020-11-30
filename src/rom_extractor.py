@@ -64,13 +64,13 @@ class MemoryExtractor:
                     image.extend(memory[lw_addr])
                 except KeyError:
                     raise KeyError("Didn't get data for address {}".format(hex(lw_addr)))
-            chksum = hashlib.md5()
+            chksum = hashlib.sha1()
             chksum.update(image)
             images.append((r, chksum.hexdigest(), image))
 
         if not all([images[0][2] == img_data[2] for img_data in images]):
             self.log.error("Failed image verification!")
-            self.log.error("Range: MD5 Checksum")
+            self.log.error("Range: SHA1 Hash")
             for img_data in images:
                 self.log.error("{}: {}".format(img_data[0], img_data[1]))
             raise ImageChecksumError("Failed image verification!", [imgdata[1] for imgdata in images])
@@ -95,7 +95,7 @@ class MemoryExtractor:
                 rom_file.write(results[image][1])
 
             # Write ROM checksum to disk
-            with open(os.path.join(directory, image) + ".md5", "x") as chksum_file:
+            with open(os.path.join(directory, image) + ".sha1", "x") as chksum_file:
                 chksum_file.write(results[image][0] + "\n")
 
 
@@ -105,8 +105,10 @@ class NWS5000:
     # (base_address, length, [mirror_ranges_for_validation])
     nws5k_roms = {
         # Monitor ROM - 256KiB, 0x9fc00000-0x9fc3ffff, mirrored 3 times beyond base
-        "monitor_rom": (0x9fc00000, 0x40000,
-                        [((0x9fc00000 + 0x40000 * n), (0x9fc00000 + 0x40000 * (n + 1))) for n in range(0, 4)])
+        "monitor_rom": (0x1fc00000, 0x40000,
+                        [((0x1fc00000 + 0x40000 * n), (0x1fc00000 + 0x40000 * (n + 1))) for n in range(0, 4)]),
+        "idrom": (0x1f3c0000, 0x400,
+                  [((0x1f3c0000 + 0x400 * n), (0x1f3c0000 + 0x400 * (n + 1))) for n in range(0, 4)])
     }
 
     @classmethod
