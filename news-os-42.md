@@ -12,7 +12,7 @@ miniroot filesystem from the CD-ROM to the swap space on disk and boot from it.
 Miniroot contains the installation script and programs. Once the miniroot image
 has booted, the installation program will start automatically.
 
-# Enabling fastboot
+## Enabling fastboot
 By default, NEWS-OS 4.2 will run disk checks at every boot. While this is typically
 a good idea, it can result in long boot times, especially if using a SCSI2SD or newer
 hard drive formatted with more space than was realistic for the time. The `fastboot`
@@ -24,7 +24,7 @@ This will cause `/etc/rc` to skip the removal of `/fastboot`, thus making every 
 skip the filesystem checks. If you do this, make sure you manually run fsck from time
 to time, or after emergency power loss situations. This is a hack, so use with care :)
 
-# X-Windows setup
+## X-Windows setup
 When installing NEWS-OS 4.2.1aR, unless you have a fully working monitor, mouse,
 and keyboard setup, I recommend installing the desired X11 packages but not
 selecting the option to start X-Windows automatically at startup. This way, the
@@ -97,3 +97,8 @@ Like modern Unix and Linux systems, the kernel can be rebuilt with configuration
 ```
 After running make, the new kernel, `vmunix`, will be available and can be loaded from the ROM monitor, or placed at
 `/vmunix`. After reboot, the kernel build date should match when `make` was run (per NEWS system clock).
+
+## NEWS-OS 4 RTC Patch Kit
+NEWS-OS 4 patches are included with the NEWS-OS 6 patch kit.
+
+![](img/rtc_patch_kit.jpeg)
