@@ -42,6 +42,10 @@ session as the login application.
 
 *sxdm login prompt*
 
+![](img/sxdm_macx.png)
+
+*sxdm login prompt as rendered by MacX*
+
 ![](img/sxsession.png)
 
 *Sony SXsession launcher*
