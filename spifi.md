@@ -1037,3 +1037,78 @@ spifi_setsync(struct spifi_softc *sc, struct spifi_tinfo *ti)
 }
 #endif
 ```
+
+## SPIFI transaction log from MAME (MROM SCSI probe)
+ ```
+<basic init>
+[:dmac] dmac0 ictl_w: 0x202 <- Enable DMAC0 interrupt and EOPIE interrupt
+[:dmac] dmac0 cnf_w: 0x20 <- SLOWACCESS for SPIFI register rw
+[:scsi0:7:spifi3] write spifi_reg.auxctrl = 0x40 <- CRST
+[:scsi0:7:spifi3] read spifi_reg.scsi_status = 0x1 <- read scsistatus and check if 0x1 - if so, SPIFI is alive. If this is 0, the SCSI buses, DMACs, and SPIFIs will not enumerate
+[:dmac] dmac1 ictl_w: 0x202 < Enable DMAC1 interrupt and EOPIE interrupt
+[:dmac] dmac1 cnf_w: 0x20 <- SLOWACCESS for SPIFI register rw
+[:scsi1:7:spifi3] write spifi_reg.auxctrl = 0x40 <- CRST
+[:scsi1:7:spifi3] read spifi_reg.scsi_status = 0x1 <- scsi status check
+
+<repeat previous section - stability/bugs? NetBSD code mentions a few issues>
+[:dmac] dmac0 ictl_w: 0x202
+[:dmac] dmac0 cnf_w: 0x20
+[:scsi0:7:spifi3] write spifi_reg.auxctrl = 0x40
+[:scsi0:7:spifi3] read spifi_reg.scsi_status = 0x1
+[:dmac] dmac1 ictl_w: 0x202
+[:dmac] dmac1 cnf_w: 0x20
+[:scsi1:7:spifi3] write spifi_reg.auxctrl = 0x40
+[:scsi1:7:spifi3] read spifi_reg.scsi_status = 0x1
+
+<restore default mode>
+[:dmac] dmac0 ictl_w: 0x202
+[:dmac] dmac0 cnf_w: 0x1
+[:dmac] dmac1 ictl_w: 0x202
+[:dmac] dmac1 cnf_w: 0x1
+ *
+ beginning of example DMAC+SPIFI transaction (running dl from the MROM)
+ [:dmac] dmac0 cnf_w: 0x20 <- Set DMAC to SLOWACCESS (SPIFI register mode)
+[:scsi0:7:spifi3] write spifi_reg.auxctrl = 0x80 <- SRST (does it automatically clear these bits?)
+[:dmac] dmac0 cnf_w: 0x1 <-Set DMAC to FASTACCESS (normal mode)
+[:dmac] dmac0 cnf_w: 0x20
+[:scsi0:7:spifi3] write spifi_reg.auxctrl = 0x40 <- CRST (does it automatically clear these bits?)
+[:dmac] dmac0 cnf_w: 0x1
+[:dmac] dmac0 cnf_w: 0x20
+[:scsi0:7:spifi3] write spifi_reg.auxctrl = 0x20 <- SETRST (does it automatically clear these bits?)
+[:dmac] dmac0 cnf_w: 0x1
+[:dmac] dmac0 cnf_w: 0x20
+[:scsi0:7:spifi3] write spifi_reg.auxctrl = 0x0 <- clear AUXCTRL register
+[:dmac] dmac0 cnf_w: 0x1
+[:dmac] dmac0 cnf_w: 0x20
+[:scsi0:7:spifi3] write spifi_reg.auxctrl = 0x80 <- set SRST (does it automatically clear these bits?)
+[:dmac] dmac0 cnf_w: 0x1
+[:dmac] dmac0 cnf_w: 0x20
+[:scsi0:7:spifi3] write spifi_reg.auxctrl = 0x40 <- set CRST (does it automatically clear these bits?)
+[:dmac] dmac0 cnf_w: 0x1
+[:dmac] dmac0 cnf_w: 0x20
+[:scsi0:7:spifi3] write spifi_reg.auxctrl = 0x4 <- set DMAEDGE
+[:dmac] dmac0 cnf_w: 0x1
+[:dmac] dmac0 cnf_w: 0x20
+[:scsi0:7:spifi3] write spifi_reg.imask = 0x22 <- mask target mode interrupts (COMRECV and TGSEL) (NetBSD masks these too)
+[:dmac] dmac0 cnf_w: 0x1
+[:dmac] dmac0 cnf_w: 0x20
+[:scsi0:7:spifi3] write spifi_reg.config = 0xf <- set config to PGENEN [3] (parity generation enable), and IID (initiator SCSI ID) [2-0]. NetBSD also enables PCHKEN (parity checking)
+[:dmac] dmac0 cnf_w: 0x1
+[:dmac] dmac0 cnf_w: 0x20
+[:scsi0:7:spifi3] write spifi_reg.fastwide = 0x0 <- fastwide mode disable (netbsd enables this)
+[:dmac] dmac0 cnf_w: 0x1
+[:dmac] dmac0 cnf_w: 0x20
+[:scsi0:7:spifi3] write spifi_reg.prctrl = 0x0 <-no extra processor options (matches netbsd)
+[:dmac] dmac0 cnf_w: 0x1
+[:dmac] dmac0 cnf_w: 0x20
+[:scsi0:7:spifi3] write spifi_reg.loopctrl = 0x0 <- no loopback (matches netbsd)
+[:dmac] dmac0 cnf_w: 0x1
+[:] LED_DISK: ON
+[:dmac] dmac0 cnf_w: 0x20
+[:scsi0:7:spifi3] read spifi_reg.spstat = 0x380 <- need to determine what the value of this register should be
+[:dmac] dmac0 cnf_w: 0x1
+[:dmac] dmac0 ictl_r: 0x202 <- waiting for interrupt (watching bit 0 of ictl)
+<hangs here>
+```
+
+NetBSD note: SCB = sequencer control block?
