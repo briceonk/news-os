@@ -25,6 +25,13 @@ Not counting things that aren't emulated, there are a few major issues I haven't
 3. AP-Bus emulation
 - Documentation is completely lacking for the AP-Bus and its associated chips. For now, I've hacked it so the monitor ROM can boot, but there is a lot that will need to be figured out on the fly as more devices are emulated.
 
+## Using a modified ROM image in MAME
+The monitor ROM does a basic checksum of itself before booting. You can patch this out by changing the code at offset 0x70C to:
+```assembly
+bne $0, $0, $bfc009c4  ; 0x140000AD in hex
+```
+The monitor ROM will still run the checksum, but when it fails it will not branch to the boot halt address (0xbfc009c4, which just branches to itself).
+
 ## 5000X memory handling
 I ran some experiments on my 5000X to see how the monitor ROM would react to the various access types. The MIPS R4400 has 4 memory regions that map to physical addresses in various ways:
 - kuseg (0x0-0x7fffffff): Access to these addresses is allowed in all modes, including user mode. Additionally, the accesses go through the MMU for translation from virtual to physical addresses, which uses the TLB set up by the system kernel (in this case, the monitor ROM).
@@ -347,3 +354,4 @@ taghi=ffffffff.ffffffff|errpc=ffffffff.ffffffff|
 21|02840...:ASID=0c|1479a8...:NC :D-G|37e430...:CE :D-G|PGSIZE=???
 22|3f342...:ASID=02|bfc5eb...:CE :D-G|edfeed...:???:D-G|PGSIZE=???
 ```
+
