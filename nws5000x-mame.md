@@ -27,6 +27,7 @@ The monitor ROM does a basic checksum of itself before booting. You can patch th
 ```assembly
 bne $0, $0, $bfc009c4  ; 0x140000AD in hex
 ```
+
 The monitor ROM will still run the checksum, but when it fails it will not branch to the boot halt address (0xbfc009c4, which just branches to itself).
 
 ## 5000X memory handling
@@ -44,6 +45,7 @@ These are the tools we need for this:
 - `mp`: Hidden command (meaning it doesn't show up when running `he`, but running `he mp` will trigger the help text for it) to dump the contents of the TLB. The command `ss -r`, which dumps the processor registers, also dumps out the TLB, but this appears to be broken on this ROM revision - the values are total garbage.
 
 First, let's take a look at what the TLB actually looks like. Usually I will only show the relevant parts, but to start off with, here is the full thing:
+
 ```
 > mp
  0|80000...:ASID=00|000000...:???:---|000000...:???:---|PGSIZE=4K
@@ -95,12 +97,33 @@ First, let's take a look at what the TLB actually looks like. Usually I will onl
 46|fff4c...:ASID=00|103f4c...:NC :DVG|103f4d...:NC :DVG|PGSIZE=4K
 47|fff4e...:ASID=00|103f4e...:NC :DVG|103f4f...:NC :DVG|PGSIZE=4K
 ```
+
 Right away, there are some interesting things going on. Note that this was captured after I was poking at some memory regions, after a clean boot the TLB usually has only 0xfff... entries mapped.
 - The first 8 entries are skipped by the monitor ROM initialization. These are most likely reserved for the OS.
 - The physical addresses for the 0xfff... addresses have the 33rd bit set - beyond the 32 bit virtual address limit (totally valid on the R4400).
 - Some of the other regions I was playing around with do NOT have this bit set. This will be important later. Note that the monitor ROM is responsible for filling the TLB in this case. The MIPS architecture requires memory management to be done by the kernel. When a TLB miss occurs, the OS has to look up the page table entry to map. Since we have no OS running, the monitor ROM does the memory mapping. It has a very simple mapping algorithm - accesses to the user space will be directly passed through to the physical address. It also maps the upper portion of kseg3 to the last portion of the physical memory (reserved for the monitor ROM, even the OS won't touch it - see the NetBSD source code).
 
-We can force the monitor ROM to modify the TLB by triggering a read to an unmapped page.
+The TLB entries also list their attributes. The first set of letters before the colon after the virtual->physical map denote the cache coherency attributes. Using the odd behavior of the `ss -r` command and the R4400 documentation, the correspondence appears to be (best guess):
+
+| C(5:3) | MROM flag | Meaning                               |
+|--------|-----------|---------------------------------------|
+| 2      | UC        | Uncached                              |
+| 3      | NC        | Cacheable noncoherent                 |
+| 4      | CE        | Cacheable coherent exclusive          |
+| 5      | CEW       | Cacheable coherent exclusive on write |
+| 6      | CUW       | Cacheable coherent update on write    |
+
+The second set of letters denotes the other attributes.
+
+| Bit | Meaning (EntryLo0/1 definition)                   |
+|-----|---------------------------------------------------|
+| D   | Dirty (page is writable)                          |
+| V   | Valid (processor ignores entry if this isn't set) |
+| G   | Global (processor ignores ASID for entry if set)  |
+
+See chapter 4 and table 4-6 in the R4400 user guide for more information.
+
+Next, we can force the monitor ROM to modify the TLB by triggering a read to an unmapped page.
 ```
 > md -w fff5a000
 fff5a000: 00000000 00000000 00000000 00000000 ................
@@ -168,7 +191,8 @@ Now, if we try to access something in kseg0 or kseg1, the TLB will not be modifi
 
 OK, now we can show the memory aliasing that arises from the MIPS memory addressing model.
 
-First, we'll write some garbage data to 0xC03f0000 (ksseg/kseg2, mapped, cached access to physical address 0x3f0000 due to how the MROM maps the address). The `me` command has a bunch of control characters, so most of that command is omitted.
+First, we'll write some garbage data to 0xC03f0000 (ksseg/kseg2, mapped access to physical address 0x3f0000 due to how the MROM maps the address). The `me` command has a bunch of control characters, so most of that command is omitted.
+
 ```
 > me c03f0000
 <set to garbage data>
@@ -177,7 +201,8 @@ First, we'll write some garbage data to 0xC03f0000 (ksseg/kseg2, mapped, cached 
 c03f0000: abcdefde cafc0ffe e0000000 00000000 ................
 c03f0010: 00000000 00000000 00000000 00000000 ................
 ```
-Since ksseg is cached and mapped, we need to use the hidden MROM command `fc` to flush the changes back to memory. Then, we can access the same address from kuseg, kseg0, and kseg1 to see that the change did indeed show up. We can also see the relevant TLB entries.
+
+Since ksseg is mapped and can be cached, we can use the hidden MROM command `fc` to flush the changes back to memory. From the TLB entry, the cache may not have been used, but I ran the `fc` command anyway. Then, we can access the same address from kuseg, kseg0, and kseg1 to see that the change did indeed show up. We can also see the relevant TLB entries.
 
 ```
 > md -w 03f0000
@@ -241,9 +266,11 @@ a03f0010: 00000000 00000000 00000000 00000000 ................
 46|00000...:ASID=00|000000...:UC :DVG|000001...:UC :DVG|PGSIZE=4K
 47|fff4e...:ASID=00|103f4e...:NC :DVG|103f4f...:NC :DVG|PGSIZE=4K
 ```
+
 As expected, the kuseg and ksseg accesses caused the TLB to be altered (entries 15 and 25), but the kseg0 and kseg1 accesses did not. Additionally, the ksseg access caused bit 33 of the physical address to be set, whereas the kuseg access did not. I'm not sure yet what that bit is supposed to do.
 
 Also, the below snippet shows the seemingly broken behavior of the `ss` command with regards to the TLB, in both 32 and 64 bit mode.
+
 ```
 > ss -r
  zero=00000000|   at=d7ef7aff|   v0=bb5f5f9d|   v1=cff6b4df|   a0=ee1cfe62
