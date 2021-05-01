@@ -1,0 +1,43 @@
+.\"
+.\" $Id: scsi.jman,v 1.3 1994/02/13 11:11:48 kurita Exp $
+.\"
+.TH scsi __MANPAGE__ "Feb 13, 1994"
+.SH 名前
+\f4scsi\f1 \- SCSIデバイスの諸元を調査する
+.SH 形式
+\f4scsi\f1
+\f2キャラクタ型デバイス...\f1
+.SH 機能説明
+\f4Scsi\f1はSCSIデバイスの諸元を調査し、結果を標準出力に出力します。
+\f2キャラクタ型デバイス\f1はSCSIデバイスでなければなりません。
+.PP
+以下のSCSIコマンドを使って調査します。
+.TP
+\f4Read capacity\f1(0x25)
+.br
+デバイスの容量を調査します。
+.TP
+\f4Inquiry\f1(0x12)
+.bf
+デバイス情報(ベンダー、型名、インタフェースバージョンなど)を
+調査します。
+.TP
+\f4Mode Sense\f1(0x1a)
+デバイスに依存する様々な情報を調査します。
+.SH ファイル
+.nf
+.ta \w'/dev/rsd/b?i?u?p?    'u
+\f4/dev/rsd??[a-h]\f1	Raw SCSIディスクドライブ (NEWS-OS 4.2)
+\f4/dev/rst??\f1	Raw SCSIテープドライブ(NEWS-OS 4.2)
+\f4/dev/scsi??\f1	その他のRaw SCSIデバイス(NEWS-OS 4.2)
+\f4/dev/rsd/b?i?u?p?\f1	Raw SCSIディスクドライブ (NEWS-OS 6.0)
+\f4/dev/rst/b?i?u?d?\f1	Raw SCSIテープドライブ (NEWS-OS 6.0)
+\f4/dev/rawscsi/b?i?\f1	その他のRaw SCSIデバイス (NEWS-OS 6.0)
+.SH 関連項目
+\f4rawscsi\f1(__MANALSO__),
+\f4sd\f1(__MANALSO__),
+\f4st\f1(__MANALSO__)
+.SH バグ
+出力されるいくつかの情報はあなたを混乱させるかもしれません。
+.SH 著者
+kurita@nippon-control-system.co.jp

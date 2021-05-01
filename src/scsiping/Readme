@@ -1,0 +1,28 @@
+SONY NEWS-OS 用 SCSI デバイス情報表示プログラムです。
+
+  NEWS-OS 4.2/4.2.1, NEWS-OS 6.0 対応のつもりです:-)
+
+  動作確認は、bigNEWS(NWS-3150)+NEWS-OS 4.2.1RN/NEWS-OS 6.0
+で行いました。
+
+  SCSI デバイスに対して、
+  o Read capacity
+  o Inquiry
+  o Mode sense
+コマンドを発行し、その結果を標準出力に出力します。
+
+  たとえば、NEWS-OS 6.0で
+	% scsi /dev/rsd/b0i[0-6]u0p2
+とすると、SCSIバス 0 につながれたすべてのデバイスを調査します。
+
+  インストールは Makefile の必要個所を修正し、
+	% make
+	# make install
+	# make install.man
+で OK です。
+
+
+栗田健司
+kurita@nippon-control-system.co.jp
+
+$Id: Readme,v 1.1 1994/02/13 09:25:14 kurita Exp $

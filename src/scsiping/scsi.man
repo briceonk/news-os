@@ -1,0 +1,43 @@
+.\"
+.\" $Id: scsi.man,v 1.2 1994/02/13 11:11:48 kurita Exp $
+.\"
+.TH scsi __MANPAGE__ "Feb 13, 1994"
+.SH NAME
+\f4scsi\f1 \- Probe SCSI devices.
+.SH SYNOPSIS
+\f4scsi\f1
+\f2character devices\f1
+.SH DESCRIPTION
+\f4Scsi\f1
+is reporting some information of SCSI devices to stdout.
+\f2Character devices\f1 must be a SCSI devices.
+.PP
+It uses following SCSI commands.
+.TP
+\f4Read capacity\f1(0x25)
+.br
+Read a capacity of device.
+.TP
+\f4Inquiry\f1(0x12)
+.bf
+Read device informations(Vendor, Product Model, Interface version and etc.)
+.TP
+\f4Mode Sense\f1(0x1a)
+Read more device spcificated parameters.
+.SH FILES
+.nf
+.ta \w'/dev/rsd/b?i?u?p?    'u
+\f4/dev/rsd??[a-h]\f1	Raw SCSI disk (NEWS-OS 4.2)
+\f4/dev/rst??\f1	Raw SCSI tape (NEWS-OS 4.2)
+\f4/dev/scsi??\f1	Raw SCSI device (NEWS-OS 4.2)
+\f4/dev/rsd/b?i?u?p?\f1	Raw SCSI disk (NEWS-OS 6.0)
+\f4/dev/rst/b?i?u?d?\f1	Raw SCSI tape (NEWS-OS 6.0)
+\f4/dev/rawscsi/b?i?\f1	Raw SCSI device (NEWS-OS 6.0)
+.SH "SEE ALSO"
+\f4rawscsi\f1(__MANALSO__),
+\f4sd\f1(__MANALSO__),
+\f4st\f1(__MANALSO__)
+.SH BUGS
+Some informations makes you confusion.
+.SH AUTHOR
+kurita@nippon-control-system.co.jp
