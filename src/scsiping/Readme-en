@@ -1,0 +1,25 @@
+This is a program for Sony NEWS-OS that displays SCSI device information.
+
+It is compatible with NEWS-OS 4.2/4.2.1 and NEWS-OS 6.0.
+
+This program was tested with both NEWS-OS 4.2.1RN and NEWS-OS 6.0 on a 
+Sony bigNEWS (NWS-3150) workstation laptop.
+
+It will execute the SCSI commands READ CAPACITY, INQUIRY, and MODE SENSE,
+then print the results to stdout.
+  
+For example, if you execute the following command on NEWS-OS 6, it will print
+out the information for devices on SCSI bus 0.
+ % scsi /dev/rsd/b0i[0-6]u0p2
+ 
+You can run the following commands to build the program and documentation from
+where the Makefile and source files were extracted.
+ % make
+ # make install
+ # make install.man
+
+
+This program was authored by:
+栗田健司
+kurita@nippon-control-system.co.jp
+

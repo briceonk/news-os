@@ -5,4 +5,6 @@ I converted the files to UTF-8 for easier browsing on modern systems, but you ca
 
 The original location for this [source code](https://web.archive.org/web/20041205045543/http://www.videa.or.jp/NEWS/archive/scsiping-NEWS.tar.gz) is [NEWS World](https://web.archive.org/web/20041205045543/http://www.videa.or.jp/NEWS/nws-soft.html) on the Internet Archive.
 
-See `Readme` for build and usage instructions.
+See `Readme` (original readme in Japanese) or `Readme-en` (translated to English) for build and usage instructions. I was able to successfully compile and run this program on a Sony NWS-5000X running NEWS-OS 4.2.1aR.
+
+Many thanks to Mr. Kurita from the Nippon Control System corporation for writing such a helpful utility! I wonder if he thought someone would still be using it almost 30 years later...
