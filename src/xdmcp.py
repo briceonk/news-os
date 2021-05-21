@@ -34,7 +34,10 @@ class XdmcpClient:
         parser.add_argument("-d", "--display_size", default="FHD", choices=cls.display_resolution_map.keys(),
                             help=cls._generate_res_help_string())
         parser.add_argument("--no_local_fonts", default=False, action="store_true",
-                            help="Don't add ~/.local/share/fonts to X11's font path")
+                            help="If set, don't add ~/.local/share/fonts to X11's font path")
+        parser.add_argument("--no_8bit_color", default=False, action="store_true",
+                            help="If set, don't use Xephyr's 8-bit color mode")
+        parser.add_argument("--display", default=":2", help="X display to create, defaults to :2")
         parser.add_argument("server", help="Hostname from /etc/hosts or IP to connect to.")
 
         return parser.parse_args(arg_source)
@@ -46,7 +49,10 @@ class XdmcpClient:
         cmd.extend(["-query", self._args.server])
 
         # Set resolution to the desired size
-        cmd.extend(["-screen", self.display_resolution_map[self._args.display_size]])
+        display_spec = self.display_resolution_map[self._args.display_size]
+        if not self._args.no_8bit_color:
+            display_spec += "x8"
+        cmd.extend(["-screen", display_spec])
 
         # Set font path if needed
         # Japanese fonts must be copied from NEWS-OS to ~/.local/share/fonts for X11 to render Japanese text correctly.
@@ -57,7 +63,8 @@ class XdmcpClient:
             cmd.extend(["-fp", fp])
 
         # Finally, set display
-        cmd.extend([":1"])
+        cmd.extend([self._args.display])
+
         return cmd
 
     def main(self):
