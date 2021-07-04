@@ -18,6 +18,7 @@ to do various tasks when working with my NWS-5000X.
 - news-os-6.md: Using NEWS-OS 6.x
 
 ## Sources and Further Reading (mainly in Japanese)
+![NEWS WAVE](https://web.archive.org/web/19970713171518im_/http://www1.sony.co.jp/image/Title_NewsWave3.top.gif)
 - [ozuma's NEWS 5000x operations page](http://ozuma.o.oo7.jp/nws5000x.htm)
 - [Sony NEWS hardware info](https://katsu.watanabe.name/doc/sonynews/)
 - [NEWS World](https://web.archive.org/web/20170202100940/www3.videa.or.jp/NEWS/)
