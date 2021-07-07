@@ -5,6 +5,10 @@ To use, run the following commands:
 ```sh
 $ cc sysnews.c -o sysnews
 $ ./sysnews
+```
+
+This should result in output like the below.
+```
 Active NEWS-OS Version: NEWS-OS Release 4.2.1R FCS#2 #0: Mon Jun 28 20:27:05 JST 1993
     root@wsrel11:/MAKE4.XR/src/sys/NEWS5000
 
