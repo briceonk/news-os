@@ -3,6 +3,7 @@
 #include <sys/errno.h>
 #include <machine/sysnews.h>
 #include <machine/machid.h>
+#include <newsaps/sysctl.h>
 
 extern int errno; /* Error codes from standard library */
 
@@ -92,10 +93,26 @@ void handle_os_version()
 
 void handle_sysctld()
 {
-    int sysctld;
-    if(!sysnews(NEWS_GETSYSDINFO, &sysctld))
+    int sysctldStatus = 0;
+    if(!sysnews(NEWS_GETSYSDINFO, &sysctldStatus))
     {
-        printf("Sysctld info: %d\n", sysctld);
+        printf("sysctld status: 0x%x\n", sysctldStatus);
+        printf("  System status: ");
+        switch(sysctldStatus & SYSC_LEVEL)
+        {
+            case SYSC_NORMAL:
+                printf("Normal\n");
+                break;
+            case SYSC_WARNING:
+                printf("Warning\n");
+                break;
+            case SYSC_ALART:
+                printf("Alert active\n");
+                break;
+            case SYSC_FATAL:
+                printf("Fatal (system shutdown imminent!)\n");
+                break;
+        }
     }
     else
     {

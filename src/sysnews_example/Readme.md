@@ -37,6 +37,7 @@ NEWS Machine Parameters
   Boot switch settings = 0
   Reserved[1] = 0
   Reserved[2] = 0
-Sysctld info: 65536
+sysctld status: 0x10000
+  System status: Normal
 ```
 
