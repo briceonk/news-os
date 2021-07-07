@@ -69,27 +69,25 @@ void handle_machparam()
 
 void handle_os_version()
 {
-    int bufferSize, attempts;
+    int bufferSize = 200;
     char *version;
-    bufferSize = 200;
-    attempts = 5;
     version = (char *)malloc(bufferSize);
-    while(attempts > 0 && sysnews(NEWS_VERSION, version, bufferSize) == -1)
+    if(sysnews(NEWS_VERSION, version, bufferSize) == -1)
     {
-        free(version);
-        bufferSize += 200;
-        --attempts;
-    }
-
-    if(attempts == 0)
-    {
-        printf("Unable to get OS version! Error code %d\n", errno);
+        if(errno == 2)
+        {
+            printf("Buffer too small! Truncated OS version: %s\n", version);
+        }
+        else
+        {
+            printf("Unable to get OS version! Error code %d\n", errno);
+        }
     }
     else
     {
         printf("Active NEWS-OS Version: %s\n", version);
-        free(version);
     }
+    free(version);
 }
 
 void handle_sysctld()
