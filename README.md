@@ -4,18 +4,15 @@ workstations. There is limited information about NEWS workstations, especially
 in English. Hopefully this will help preserve information about these
 workstations. This is very much a work-in-progress.
 
-The `src` folder contains source code and scripts for quick utilities I wrote
-to do various tasks when working with my NWS-5000X.
-- `newsos_cd_extractor.py`: Extracts archives from the NEWS-OS 4.2.1aR CD
-- `xdmcp.py`: Automates launching XDMCP sessions from any machine with Xephyr installed
-- `rarp/`: Docker image which can respond to RARP requests from the NEWS ROM Monitor
-- `serial_keyboard/`: Script for using a modern workstation + USB->TTL adapters to emulate a NEWS serial mouse and keyboard
-
-## Pages
-- introduction.md: What is NEWS?
-- nws5000x.md: Information about the NWS-5000x workstation
-- news-os-42.md: Using NEWS-OS 4.2.x
-- news-os-6.md: Using NEWS-OS 6.x
+## Index
+- `devices`: Information about specific chips or devices used in NEWS machines.
+- `src`: Folder with source code and scripts for use with NEWS workstations (and occasionally other types).
+- `introduction.md`: What is NEWS?
+- `news-os-42.md`: Using NEWS-OS 4.2.x
+- `news-os-6.md`: Using NEWS-OS 6.x
+- `nws5000x-board-pictures.md`: Pictures of the inside of an NWS-5000X
+- `nws5000x-mame.md`: Information about emulating the [NWS-5000X](https://github.com/briceonk/mame)
+- `nws5000x.md`: Information specific to the NWS-5000X workstation
 
 ## Sources and Further Reading (mainly in Japanese)
 ![NEWS WAVE](https://web.archive.org/web/19970713171518im_/http://www1.sony.co.jp/image/Title_NewsWave3.top.gif)
