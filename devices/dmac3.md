@@ -1,7 +1,7 @@
 # DMAC3 notes
 The NWS-5000X has two Hewlett Packard SPIFI3 SCSI controllers. Sony also included a DMA controller called the DMAC3, which seems to have two onboard DMA controllers and offboard DMA mapping RAM. I have not been able to find datasheets for either the DMAC3 (not surprising) nor the SPIFI3 (slightly more surprising since it isn't a Sony chip).
 
-## DMAC3 Memory Mapping
+## DMAC3 Memory Mapping (DRAFT)
 Note: this section is a draft. I'm still in the middle of developing emulation for this part.
 
 The DMAC3 has its own virtual->physical addressing scheme. Like the R4400 CPU's TLB, the host OS is responsible for populating the DMAC's TLB.
@@ -19,9 +19,11 @@ The entry field is packed as follows:
 
 The DMAC3 requires RAM to hold its page table/TLB. On the NWS-5000X, this is 128KiB starting at physical address 0x14c20000.
 
-The monitor ROM populates the PTEs as follows in response to a `dl` command.
+The monitor ROM populates the first two PTEs as follows in response to a `dl` command.
+```
 Addr       PTE1             PTE2
 0x14c20000 0000000080103ff5 0000000080103ff6
+```
 
 It also loads the `address` register with 0xd60. This will cause the DMAC to start mapping from virtual address 0xd60 to physical address 0x3ff5d60.
 If the address register goes beyond 0xFFF, bit 12 will increment. This will increase the page number so the virtual address will be
