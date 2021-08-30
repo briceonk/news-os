@@ -1,5 +1,41 @@
 # DMAC3 notes
 The NWS-5000X has two Hewlett Packard SPIFI3 SCSI controllers. Sony also included a DMA controller called the DMAC3, which seems to have two onboard DMA controllers and offboard DMA mapping RAM. I have not been able to find datasheets for either the DMAC3 (not surprising) nor the SPIFI3 (slightly more surprising since it isn't a Sony chip).
+
+## DMAC3 Memory Mapping
+Note: this section is a draft. I'm still in the middle of developing emulation for this part.
+
+The DMAC3 has its own virtual->physical addressing scheme. Like the R4400 CPU's TLB, the host OS is responsible for populating the DMAC's TLB.
+Each entry in the page table is structured as follows:
+```
+0x xxxx xxxx xxxx xxxx
+  |   pad   |  entry  |
+```
+
+The entry field is packed as follows:
+```
+0b    x      x     xxxxxxxxxx xxxxxxxxxxxxxxxxxxxx
+   |valid|coherent|    pad2  |       pfnum        |
+```
+
+The DMAC3 requires RAM to hold its page table/TLB. On the NWS-5000X, this is 128KiB starting at physical address 0x14c20000.
+
+The monitor ROM populates the PTEs as follows in response to a `dl` command.
+Addr       PTE1             PTE2
+0x14c20000 0000000080103ff5 0000000080103ff6
+
+It also loads the `address` register with 0xd60. This will cause the DMAC to start mapping from virtual address 0xd60 to physical address 0x3ff5d60.
+If the address register goes beyond 0xFFF, bit 12 will increment. This will increase the page number so the virtual address will be
+0x1000, and will cause the DMAC to use the next PTE (in this case, the next sequential page, 0x3ff6000).
+
+NetBSD splits the mapping RAM into two sections, one for each DMAC controller. If the OS does not keep track, the DMACs
+could end up in a configuration that would cause them to overwrite each other's data.
+
+Another note: NetBSD mentions that the `pad2` section of the register is 10 bits. However, this might not be fully accurate.
+On the NWS-5000X, the physical address bus is 36 bits because it has an R4400SC. The 32nd bit is sometimes set, depending
+on the virtual address being used (maybe it goes to the memory controller). It doesn't impact the normal operation of the
+computer, but does mean that the `pad2` section might only be 6 bits, not 10 bits. See `nws5000x-mame.md` for more details
+on the NWS-5000's memory mapping scheme.
+
 ## DMAC3 NetBSD source annotated
 All source below annotated by me, everything else is copyrighted by the original authors and reproduced here under the terms of the BSD license (https://www.netbsd.org/about/redistribution.html)
 ```
