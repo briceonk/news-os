@@ -2,25 +2,49 @@
 The NWS-5000X driver can be found in [this MAME fork](https://github.com/briceonk/mame). While there are a few new files, the main driver file can be found [here](https://github.com/briceonk/mame/blob/master/src/mame/drivers/news_r4k.cpp).
 
 ## Current status
-With a few hacks, the driver can boot the monitor ROM. Basic commands (memory viewing, status information, expression evaluation, etc.) are mostly functional, anything requiring non-serial I/O is not.  See the driver comments for a more exhaustive list of what is/isn't emulated.
+
+### Monitor ROM
+With a few workarounds related to memory and APbus initialization, the driver can boot the monitor ROM. Basic commands (memory viewing, status information, expression evaluation, etc.) are mostly functional.
 ![](img/nws5000x_mame_mrom.png)
 *MAME booted to the monitor ROM prompt*
+
 ![](img/mame_memory_status.png)
 *Emulated NWS-5000X's memory status from `ss -m`*
+
 ![](img/mame_tlb_dump.png)
 *TLB information dumped using the hidden `mp` command*
+
 ![](img/mame_device_list.png)
-*Device list. Note that a few tricks are used to get it to think the DMAC and SPIFIs are visible even though they are not emulated. The SONIC shows up regardless of if it is actually functional or not.*
+*Device list*
 
-## Issues
-Not counting things that aren't emulated, there are a few major issues I haven't been able to solve yet.
+### NEWS-OS 4.2.1aRD
+NEWS-OS 4 currently boots with two workarounds required.
+1. The secondary cache global must be set using the debugger early in the init process. The secondary cache is not emulated, so the SCACHE size is not enumerated correctly. This causes issues with the NEWS-OS page size calculation for bringing up the memory manager. Changing this to 1MB using the MAME debugger works around this issue.
+2. The 4.2.1aRD kernel includes the so-called "esccf" asynchronous I/O driver by default. This driver uses the ESCC1 chip and an APbus FIFO (not sure if it uses one of the FIFOQ chips, or if the ESCC1 has some FIFO stuff built in) to allow for bidirectional DMA communication. I reconfigured the kernel to remove this driver, so that I can come back to it later. Reverse engineering undocumented chips by poking at code that uses them takes a long time (see: SPIFI3 and DMAC3 :) )
 
-1. Physical memory mapping and general physical address issues
+The 5000X also seems to have TimIntDis set on the R4400SC CPU. I had to add emulation of that bit to the MAME MIPSIII cores because the NEWS-OS kernel would get caught in an infinite loop in the level 5 interrupt handler. Given that the platform uses that as an external interrupt (for things like ECC and bus errors), it is most likely programming this bit in the R4400.
+
+![](img/421aRD-mame.png)
+*NEWS-OS 4 booted to the login prompt*
+
+### NetBSD
+The floppy "miniroot" used to install the newsmips NetBSD port can boot without any workarounds beyond what is required for the monitor ROM. For now, I've only implemented enough of the APbus FIFOQ chip logic to read from devices like the FDC, but that is all the NetBSD installer needs.
+
+![](img/netbsd-floppy.png)
+*NetBSD booted to the floppy installer*
+
+With the current SPIFI3 and DMAC3 emulation, it can also detect and enumerate emulated hard drives. However, something still seems to be buggy in the SPIFI3 emulation, since NetBSD seems to think there are multiple LUNs attached, when there is just one. NEWS-OS doesn't have this problem.
+
+### NEWS-OS 6.1.2
+For now, I am focusing on 4.2.1aRD but will move on to 6.1.2 (and NetBSD from a hard drive, for that matter) after that.
+
+## Other Issues
+### Physical memory mapping and general physical address issues
 - It took me a very long time to find a configuration that allowed the monitor ROM to enumerate 64MB of RAM (matches what my platform has). Using a disassembler, I was able to partially reverse engineer the algorithm it uses to scan memory and I came up with a hack that hooks off of a change in a part of memory to shift the memory addresses around to stop the monitor ROM from getting lost in the weeds. This change might be a coincidence, but it happens in between the first scan (where it expects the memory to be split) and the second scan (where it expects the unified 64MB starting from 0x0).
 - Because of this, I'm not sure if I am missing something in how the memory scan is supposed to work, or if one of the ASICs on the board is actually playing around with the address map to compensate for how the board and/or memory cards are physically designed.
 - Note that the MIPS R4400SC has a 36-bit physical address bus. I'm not sure if this is breaking things either. I haven't found a way to have an offset greater 32 bits in MAME yet, but that might help. The MSB of the physical address (bit 33) seems to be influenced by the memory region used to access it. See the below section for more details. The memory base from the status command `ss -m` (see above screenshot) has the RAM base set to 0x100000000.
-2. AP-Bus emulation
-- Documentation is completely lacking for the AP-Bus and its associated chips. For now, I've hacked it so the monitor ROM can boot, but there is a lot that will need to be figured out on the fly as more devices are emulated.
+### APbus emulation
+- For now, I've done the minimum for the monitor ROM to boot, but there is a lot that will need to be figured out on the fly as more devices are emulated. Miraculously, the APbus specs are available on the [OCMP website](https://web.archive.org/web/19970713173157/http%3A%2F%2Fwww1.sony.co.jp%2FOCMP%2F), courtesy of the Internet Archive. 
 
 ## Using a modified ROM image in MAME
 The monitor ROM does a basic checksum of itself before booting. You can patch this out by changing the code at offset 0x70C to:
