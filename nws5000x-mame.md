@@ -24,8 +24,17 @@ NEWS-OS 4 currently boots with two workarounds required.
 
 The 5000X also seems to have TimIntDis set on the R4400SC CPU. I had to add emulation of that bit to the MAME MIPSIII cores because the NEWS-OS kernel would get caught in an infinite loop in the level 5 interrupt handler. Given that the platform uses that as an external interrupt (for things like ECC and bus errors), it is most likely programming this bit in the R4400.
 
+SXDM, the NEWS X11 session manager, works in MAME. Using a TAP/TUN virtual NIC to connect to the emulated platform, you can use an application like Xephyr to connect to and use the emulator.
+
 ![](img/421aRD-mame.png)
 *NEWS-OS 4 booted to the login prompt*
+
+![](img/mame_sxdm_login.png)
+*SXDM login viewed with Xephyr, connected to MAME via TAP/TUN*
+
+![](img/mame_applications_running.png)
+![](img/mame_more_applications_running.png)
+*X11 session over TAP/TUN*
 
 ### NetBSD
 The floppy "miniroot" used to install the newsmips NetBSD port can boot without any workarounds beyond what is required for the monitor ROM. For now, I've only implemented enough of the APbus FIFOQ chip logic to read from devices like the FDC, but that is all the NetBSD installer needs.
