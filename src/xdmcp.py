@@ -16,7 +16,8 @@ class XdmcpClient:
         "WXGA+": "1440x900",
         "HD+": "1600x900",
         "WSXGA+": "1680x1050",
-        "FHD": "1920x1080"
+        "FHD": "1920x1080",
+        "QHD": "2560x1440"
     }
 
     def __init__(self, arg_source=None):
