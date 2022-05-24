@@ -1,6 +1,10 @@
 # SPIFI notes
 The NWS-5000X has two Hewlett Packard SPIFI3 SCSI controllers. Sony also included a DMA controller called the DMAC3, which seems to have two onboard DMA controllers and offboard DMA mapping RAM. I have not been able to find datasheets for either the DMAC3 (not surprising) nor the SPIFI3 (slightly more surprising since it isn't a Sony chip).
 
+## Ideas/Notes
+AUTOSTAT - might trigger interrupt when it is done? Based on NEWS-OS hanging while waiting for a function to complete.
+CMDPAGE should have the ID for AUTOSTAT, AUTODATA, etc?
+
 ## SPIFI NetBSD source annotated
 All source below annotated by me, everything else is copyrighted by the original authors and reproduced here under the terms of the BSD license (https://www.netbsd.org/about/redistribution.html)
 ```

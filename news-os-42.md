@@ -39,6 +39,14 @@ This will cause `/etc/rc` to skip the removal of `/fastboot`, thus making every 
 skip the filesystem checks. If you do this, make sure you manually run fsck from time
 to time, or after emergency power loss situations. This is a hack, so use with care :)
 
+## Enabling extended boot logging
+The monitor ROM will pass a 32-bit unsigned integer with boot flags that are OS-specific. NEWS-OS 4.2.1 has a few different flags, but the main flag of interest is 0x40000000. When this flag is provided to the bootloader, the kernel will print out additional information during the boot process.
+
+For example, on an NWS-5000, you can set the flag variable with the `-o` parameter to `bo`.
+```
+> bo scsi(0,0) -o 40000000
+```
+
 ## X-Windows setup
 When installing NEWS-OS 4.2.1aR, unless you have a fully working monitor, mouse,
 and keyboard setup, I recommend installing the desired X11 packages but not
