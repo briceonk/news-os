@@ -1,2 +1,2 @@
-docker run --network host --restart unless-stopped -d rarp:latest 
+docker run --privileged --network host --restart unless-stopped -d rarp:latest 
 
