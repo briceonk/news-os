@@ -1,0 +1,16 @@
+# This file contains machine-specific information intended to be customized per deployment.
+hostname: news68k.cooldomain
+system: nws1500
+domain-name: cooldomain
+ip: 192.168.5.105
+netmask: 255.255.255.0 # my-netmask to leave default netmask
+gateway: 192.168.5.1 # my-router to disable gateway
+dm: sxdm # Valid choices are sxdm and xdm. Any other value will be treated as "none".
+disklabel: hd1307
+fstab: # "c" is not a valid partition letter to use, since NEWS-OS uses it to refer to the whole disk
+  root: a
+  swap: b
+  tmp: d
+  var: e
+  usr: f
+  export: h

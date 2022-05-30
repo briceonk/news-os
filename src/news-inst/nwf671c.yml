@@ -1,0 +1,134 @@
+kit: nwf671c
+name: NEWS-OS Install Kit NWF-671C
+os-version: NEWS-OS Release 4.1C
+volumes: 4
+vol1:
+  path: "4.1CA_1_extracted"
+  install-files:
+    - "00003" # base fs including /usr and /var
+    - "00004" # /usr files
+    - "00010" # /usr/src/sys files
+    - "00011" # /usr/src/sys netboot server collateral
+  ignore:
+    - "00000" # miniroot disk image
+    - "00001" # version tag
+    - "00002" # install utilities
+    - "00012" # /sbin, /etc, /var stuff (lightweight version of 3?)
+vol2:
+  path: "4.1CA_2_extracted"
+  install-files:
+    - "00002" # X11 binaries and fonts
+    - "00003" # X11 binaries and config files
+    - "00004" # X11 source, build tools, libs
+    - "00005" # Fonts
+    - "00006" # NEWS Desk
+  ignore:
+    - "00000" # tape marker
+    - "00001" # version tag
+vol3:
+  path: "4.1CA_2_extracted"
+  install-files:
+    - "00009" # Compilers, libraries, tools
+    - "00010" # Programming tools
+    - "00011" # Lisp
+    - "00012" # Programming tools
+    - "00013" # man pages
+    - "00014" # ShiftJIS man pages
+    - "00015" # Miscellaneous documentation (X11, OSS, Sony CGI, etc)
+  ignore:
+    - "00007" # tape marker
+    - "00008" # version tag
+vol4:
+  path: "4.1CA_2_extracted"
+  install-files:
+    - "00018" # Printer and image conversion/processing utilities
+    - "00020" # Fonts
+    - "00021" # Fonts
+    - "00023" # More image utilities
+    - "00024" # sj2, sj3, sjx (Japanese input processing)
+    - "00025" # Fonts and utilities
+    - "00026" # Dictionary/spell
+    - "00027" # CGI demos and fonts
+    - "00028" # Plot libraries
+    - "00029" # Version control
+    - "00030" # uucp
+    - "00031" # mh
+    - "00032" # Games
+    - "00033" # learn
+    - "00034" # Sound utilities
+    - "00035" # isdn
+    - "00036" # snmp
+    - "00037" # Image board and lpf samples
+  ignore:
+    - "00016" # tape marker
+    - "00017" # version tag
+    - "00019" # Printer fonts, but archive is damaged. Most files can still be extracted if desired.
+    - "00022" # Image processing and demos, but archive is damaged. Most files can still be extracted if desired.
+systems:
+  - nws800
+  - nws1500
+# The machine-type-specific parameters (especially devices) are configurable.
+# However, most users will not need to change these.
+nws800:
+  kernel:
+    path: "4.1CA_1_extracted"
+    install-files:
+      - "00009" # iopboot and vmunix
+  links:
+    - source: ../usr/arch/mc68020
+      link: arch
+      cwd: sbin/
+nws1500:
+  kernel:
+    path: "4.1CA_1_extracted"
+    install-files:
+      - "00006" # vmunix for NWS-1700 (which works for the 1500. The 1400 kernel in 00007 also works)
+  links:
+    -
+      source: ../usr/arch/mc68030
+      link: arch
+      cwd: sbin/
+  copy:
+    -
+      source: /usr/mdec.68k/boot
+      destination: /
+  devices:
+    - std
+    - sd00
+    - sd01
+    - sd02
+    - sd03
+    - sd04
+    - sd05
+    - sd06
+    - st0
+    - st1
+    - st2
+    - st3
+    - scsi06
+    - fd0
+    - md
+    - rs0
+    - rs1
+    - rs2
+    - lp0
+    - pty0
+    - pty1
+    - pty2
+    - pty3
+    - pty4
+    - pty5
+    - pty6
+    - pty7
+    - pty8
+    - pty9
+    - fb0
+    - keyboard
+    - mouse
+    - ir
+    - lbp
+    - ib
+    - vmemem
+    - sb
+    - sbe
+    - isdn
