@@ -39,6 +39,8 @@ class XdmcpClient:
         parser.add_argument("--no_8bit_color", default=False, action="store_true",
                             help="If set, don't use Xephyr's 8-bit color mode")
         parser.add_argument("--display", default=":2", help="X display to create, defaults to :2")
+        parser.add_argument("--no_byteswap_option", default=False, action="store_true",
+                            help="If set, don't add +byteswappedclients (needed for newer Xorg versions)")
         parser.add_argument("server", help="Hostname from /etc/hosts or IP to connect to.")
 
         return parser.parse_args(arg_source)
@@ -62,6 +64,10 @@ class XdmcpClient:
                                 shell=True, capture_output=True).stdout.split()[2].decode('utf-8')
             fp += "," + os.path.expanduser("~/.local/share/fonts")
             cmd.extend(["-fp", fp])
+
+        # For newer Xorg servers, allow byteswapped clients
+        if not self._args.no_byteswap_option:
+            cmd.extend(["+byteswappedclients"])
 
         # Finally, set display
         cmd.extend([self._args.display])
