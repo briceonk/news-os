@@ -101,8 +101,8 @@ class MvmeSerialKeyboardConverter:
                         print("Warning: unimplemented key {}, scan code {}. Ignoring...".format(key_name,
                                                                                                 key_input.scan_code))
                     else:
-                        if key_input.event_type == "up":
-                            news_key_code = bytes([b'\x80'[0] | news_key_code[0]])
+                        # if key_input.event_type == "up":
+                        #     news_key_code = bytes([b'\x80'[0] | news_key_code[0]])
                         sp.write(news_key_code)
         finally:
             keyboard.stop_recording()
