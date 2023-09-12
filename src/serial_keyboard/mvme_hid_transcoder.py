@@ -47,15 +47,15 @@ class MvmeSerialKeyboardConverter:
         'P7': 0x0027, 'P8': 0x0015, 'P9': 0x0005, 'P-': 0x0009,
         # Letters and such
         'tab': 0x00e5, 'q': 0x00d5, 'w': 0x00c5, 'e': 0x00b7, 'r': 0x00a5, 't': 0x00a7, 'y': 0x0095, 'u': 0x0087,
-        'i': 0x0079, 'o': 0x0077,
-        'p': 0x0065, '[': 0x0057, ']': 0x0049,
+        'i': 94, 'o': 0x0077,
+        'p': 89, '[': 0x0057, ']': 0x0049,
         # 'delete': '27', 'insert': '6B',
         'P4': 0x0029, 'P5': 0x0019, 'P6': 0x0017,
         # 'P,': '56',  # TODO: Is P, enough?
         'ctrl': 0x00d7,  # Left Ctrl  TODO: Left ctrl vs right ctl?
         # More letters and such
         'a': 0x00c7, 's': 0x00c9, 'd': 0x00b9, 'f': 0x00a9, 'g': 0x0097, 'h': 0x0099, 'j': 0x0089, 'k': 0x007b, 'l': 0x0069, ';': 0x0067,
-        "'": 0x005b, '`': 0x00e3, 'enter': 0x0059, 'CLR': '6C', 'P1': 0x002d, 'P2': 0x001b, 'P3': 0x000b,
+        "'": 0x005b, '`': 0x00e3, 'enter': 86, 'CLR': '6C', 'P1': 0x002d, 'P2': 0x001b, 'P3': 0x000b,
         # 'Penter': '5A',
         'shift': 0x00db,  # Left Shift  TODO: Left shift vs right shift?
         'z': 0x00cb, 'x': 0x00bb, 'c': 0x00bd, 'v': 0x00ab, 'b': 0x009b, 'n': 0x009d, 'm': 0x008b,
@@ -90,7 +90,7 @@ class MvmeSerialKeyboardConverter:
 
     def main(self):
         try:
-            with serial.Serial(port=self.news_sp) as sp:
+            with serial.Serial(port=self.news_sp, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS) as sp:
                 while True:
                     key_input = self.in_q.get(block=True)  # type: keyboard.KeyboardEvent
                     key_name = key_input.name if not key_input.is_keypad else "P" + key_input.name
