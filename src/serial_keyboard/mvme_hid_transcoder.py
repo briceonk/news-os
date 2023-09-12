@@ -95,6 +95,7 @@ class MvmeSerialKeyboardConverter:
                     key_input = self.in_q.get(block=True)  # type: keyboard.KeyboardEvent
                     key_name = key_input.name if not key_input.is_keypad else "P" + key_input.name
                     key_name = self.clean_key_name(key_name)
+                    print("Got key " + key_name)
                     try:
                         news_key_code = self.nwp5461_map[key_name].to_bytes(2, 'big')
                     except KeyError:
@@ -103,6 +104,7 @@ class MvmeSerialKeyboardConverter:
                     else:
                         # if key_input.event_type == "up":
                         #     news_key_code = bytes([b'\x80'[0] | news_key_code[0]])
+                        print("Sending code " + news_key_code.hex())
                         sp.write(news_key_code)
         finally:
             keyboard.stop_recording()
