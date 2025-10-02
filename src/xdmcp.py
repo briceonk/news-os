@@ -42,6 +42,7 @@ class XdmcpClient:
         parser.add_argument("--no_byteswap_option", default=False, action="store_true",
                             help="If set, don't add +byteswappedclients (needed for newer Xorg versions)")
         parser.add_argument("server", help="Hostname from /etc/hosts or IP to connect to.")
+        parser.add_argument("-v", "--verbose", default=False, action="store_true", help="Verbose output")
 
         return parser.parse_args(arg_source)
 
@@ -71,6 +72,9 @@ class XdmcpClient:
 
         # Finally, set display
         cmd.extend([self._args.display])
+
+        if self._args.verbose:
+            print("Running command: " + " ".join(cmd))
 
         return cmd
 
