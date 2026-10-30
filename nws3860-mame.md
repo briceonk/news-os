@@ -1,15 +1,17 @@
-# Setting up an emulated NWS-3860
+# NWS-3860 Emulation Guide
 
 The NWS-3860 is a dual-CPU Unix workstation with a MIPS R3000 main CPU and a Motorola 68030 I/O processor.
 Installation media is available for the BSD-based NEWS-OS 4.1R, and this is a step-by-step guide for installing it.
 Please note that while this guide explains the basics of configuring MAME, there is much more than I can cover here.
 See the [MAME documentation](https://docs.mamedev.org/) for more information.
 
-## Installing NEWS-OS 4.1R
+## Prerequisites
 
 ### Requirements
 
-- MAME version 0.281 or later (IMPORTANT: versions before 0.281 had the nws3860 driver, but it was a skeleton)
+- MAME version 0.290 or later
+  - IMPORTANT: If you use versions 0.281-0.289, you will have to use the serial console, because I did not implement
+  graphics support until 0.290. Versions before 0.281 had the nws3860 driver, but it was a skeleton.
 - NWS-3860 firmware image and 4.1R floppy and magneto-optical disk images (see the MAME software list for the expected
   names and hashes)
 - If you are dumping your own 4.1R magneto-optical disk, you must convert it to CHD format and add the `IDNT` metadata
@@ -48,8 +50,10 @@ Example commands:
 
 ```sh
 sudo src/osd/sdl/taputil.sh -c $USER 192.168.5.5 192.168.5.1 # assumes you are running from the MAME source code directory; replace with your network setup command or omit if desired
-mame nws3860 -scsi0:4 harddisk -hard1 hd1307.chd -hard2 nwf_672rb -flop nwf_672rb -serial0 pty # `-serial0 pty` may not work for Windows, but it does work for Linux and macOS
+mame nws3860 -scsi0:4 harddisk -hard1 hd1307.chd -hard2 nwf_672rb -flop nwf_672rb
 ```
+
+#### Note for serial console users (ignore if using graphics)
 
 If you use `pty` for the serial connection, bring up the MAME UI (Scroll Lock on Linux/Windows, Forward Delete on macOS)
 and navigate to the `Pseudo Terminals` option. This will point to the `pty` to connect to with `screen`, `minicom`, etc.
@@ -73,34 +77,37 @@ monitor and NEWS-OS over serial.
   program will launch automatically after the miniroot kernel loads.
     - ![](img/nws3860/installer-start.png)
 - Press `c` then `y` and wait a little bit for the installation program to exit.
-    - ![](img/nws3860/sh-prompt.png)
 - Execute the command `disklabel -w sd00 hd1307` to write the disklabel. The installer will automatically format each
   partition later. If you used a disk size/partition table other than `hd1307`, use that for the disklabel instead.
     - ![](img/nws3860/disklabel-command.png)
-- Then, run `./Install` to re-launch the installer.
-    - Note: I've seen this have some issues before, but it isn't consistent. If the installer doesn't load, simply
-      reboot MAME and start following the below steps once the installer starts (following the same boot steps). The
-      disklabel will persist as long as you answer `y` when the installer program asks if it should use the existing
-      disklabel.
+- Then, close and relaunch MAME. The system doesn't like having its disklabel swapped out like that live!
+Normally, you could use the format floppy for this, but that isn't working yet (I think due to some missing SCSI commands
+in the HD emulation).
+- Follow the previous steps up through getting to the installer program again, answering `y` when the bootloader program
+asks if it should use the existing disklabel on the next boot.
 - Press `a` and then `y` to begin the installation process
 - Press `c` and then `y` to select `MO disk` as the installation kit type
 - Press `y` again to accept the MO drive as `sd04`
-- Select VT-100 (`k`) as the terminal type
-- Select a language and a timezone
+- Select NWP-512 (`b`) as the terminal type then press `y`
+- Select a language and a timezone. If you select Japanese (Shift-JIS or EUC), answer `n` to
+`Do you use "OYAYUBI-shift keyboard(NWP-410)"`.
 - Press `y` to continue with installing to the `hd1307` disk image, and press `y` two more times to mount `/usr` locally
   and use the default installation partitions (optionally, you can swap the `usr` and `exp` partitions here, but you can
   also resize them later).
 - Select the packages you want to install, or press `*` to select everything. This will put you over the limit, but you
   can adjust the partition size on the next screen. Press enter to continue.
+  - ![](img/nws3860/install-functions.png)
 - Press `n` to change the partition size. I recommend shrinking the `exp` partition (partition f), since you most likely
   want to play around with NEWS-OS utilities rather than host an NFS server or something else that needs a huge `exp`
   partition. Select `h->f` then use the `1`-`5` and `k` keys to grow the `usr` partition to be bigger than the installed
   size, then press `q` then `y` to continue. The required partition size is in the lower-right corner.
-    - ![](img/nws3860/partition-resize.png)
+  - ![](img/nws3860/partition-resize.png)
 - If you want to connect to a network, select `y` and enter the IP address you intend the emulated platform to use. If
-  you want to use X11, make sure you answer `y` here, since there is no framebuffer emulation yet.
-- Select `n` on the next screen related to X11. You can later launch `sxdm` from the terminal to allow network logins to
-  use X11.
+  you want to use X11 with color over the network, make sure you answer `y` here, since the only option (for now) is
+  monochrome framebuffer emulation.
+- Select `y` or `n` on the next screen related to X11. You can later launch `sxdm` from the terminal if you select `n`.
+If you select `y`, `sxdm` will always start on boot, and you will not be able to get a regular console session without
+using single-user mode.
 
 After this, the installer will commit the final partition sizes, format each partition, and install the selected
 packages.
@@ -114,15 +121,17 @@ you don't want to immediately try to boot NEWS-OS.
 ### Booting NEWS-OS 4.1R for the first time
 
 - You no longer need to add an extra drive to the SCSI chain for the MO drive or use the floppy image, so you can remove
-  `-scsi0:4 harddisk`, `-hard2 nwf_672rb`, and `-flop nwf_672rb` from your command line arguments to MAME. Most CLI
-  programs in NEWS-OS don't use special control characters as much as the installer does, so you can also remove
-  `-serial0 pty` if you wish. Ensure you enable the terminal's "Generic Keyboard" (see steps above) if you do.
+  `-scsi0:4 harddisk`, `-hard2 nwf_672rb`, and `-flop nwf_672rb` from your command line arguments to MAME.
 - Once the emulated platform boots to the NEWS monitor ROM, boot from the internal hard disk by running `bo`.
-    - ![](img/nws3860/booting.png)
-- If all goes well, this will boot to the login prompt. This may take a very long time due to the disk check. See
-  `news-os-42.md` for instructions on bypassing the disk check for future boots.
+- If all goes well, this will boot to the login prompt, either in `sxdm` or the console depending on your installation settings.
+If the installer didn't clean up the summary information of the root partition and `fsck` repairs it and tries to reboot, the
+system may hang. In that case, just close and reopen MAME. Since `fsck` fixed the issue, it will work on next boot.
+Booting may take a very long time due to the disk check. See `news-os-42.md` for instructions on bypassing the disk check for future boots.
     - ![](img/nws3860/login-prompt.png)
 - Log in as `root`. There is no password by default.
+- From here, you can use the system! If you are using X11 and NEWS Desk, you can use `sxadmin` to create a non-root user.
+Of course, you can also use traditional Unix CLI tools to do so :)
+  - ![](img/nws3860/news-desk.png)
 - To shut down the system cleanly, run `shutdown -x now` as `root`. The emulated system will power off and quit MAME
   automatically when it is done synchronizing the disks.
 
@@ -132,33 +141,25 @@ Setting up networking can be a bit tricky. The below instructions are for Linux.
 other operating systems.
 
 - First, make sure that you have selected "TAP/TUN device" in the MAME UI.
-    - Press Scroll Lock to disable special key passthrough, then press Tab, then scroll down to `Network Devices`).
+  - Press Scroll Lock to disable special key passthrough, then press Tab, then scroll down to `Network Devices`.
 - Then, you should be able to reach the emulator at the configured IP address, as long as you used `taputil.sh` per the
   instructions earlier in this document.
 - Make sure you add your host as the default route, otherwise XDMCP (and some other applications) may not work.
-    - `route add default <TAP/TUN host IP> 1`
+  - `route add default <TAP/TUN host IP> 1`
 
-### Enabling X11
+### Enabling X11 over the network
 
-- On the NWS-3860, `sxdm` (the NEWS Desk display manager) does not like having a framebuffer session by default. So, do
-  the following as `root` before starting `sxdm`:
-    ```sh
-    vi /etc/sxdm/Xservers
-    # Use the arrow keys to move the cursor to the last line, ":0 local /usr/bin/X11/X -ls 3000 -bs
-    # Press the 'd' key twice to delete it, then press Esc, then ":wq" to save the file to disk
-    ```
-- Next, run the `sxdm` command as `root`. This will start `sxdm` and you may connect to it over the network using Xephyr
-  or Xnest (8-bit color mode with Xephyr recommended.)
-  See [xdmcp.py](https://github.com/briceonk/news-os/blob/master/src/xdmcp.py) for a wrapper script (or to get the
-  command details for Xephyr)
+- If you didn't have `sxdm` start automatically, run the `sxdm` command as `root`. This will start `sxdm` in the background and you may
+connect to it over the network using Xephyr or Xnest (8-bit color mode with Xephyr recommended).
+  - See [xdmcp.py](https://github.com/briceonk/news-os/blob/master/src/xdmcp.py) for a wrapper script (or to get the command details for Xephyr)
     - ![](img/nws3860/sxdm-login-prompt.png)
     - Example Xephyr command:
-      ```sh 
+
+      ```sh
       Xephyr -query <MAME target IP address> -screen 1280x1024x8 -fp catalogue:/etc/X11/fontpath.d,built-ins,/home/<user>/.local/share/fonts +byteswappedclients :2
       ```
+
     - You can also use `xdm` instead of `sxdm`, but `sxdm` has a cool NEWS-specific login screen and automatically
       launches `sxsession` when you log in.
     - You will need to copy the NEWS-OS fonts from the subfolders of the NEWS `/usr/lib/X11/fonts` directory to your
       `~/.local/share/fonts` directory. You can use `ftp` for this (among many other ways).
-- Once you have logged in to X11, you can use the `sxadmin` program to add a non-root user. Of course, you can also use
-  traditional Unix CLI tools to do so :)

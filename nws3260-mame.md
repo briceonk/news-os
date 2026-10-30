@@ -1,8 +1,8 @@
-# Setting up an emulated NWS-3260
+# NWS-3260 Emulation Setup Guide
 
 The NWS-3260 is a MIPS R3000-based workstation laptop. Installation media is avaliable for the BSD-based NEWS-OS 4.1R, and this guide is a step-by-step guide for installing it.
 
-## Installing NEWS-OS 4.1R
+## Prerequisites
 
 ### Requirements
 
